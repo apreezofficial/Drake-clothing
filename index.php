@@ -53,7 +53,52 @@ $currentTheme = $_SESSION['theme'] ?? 'light';
     </div>
 
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full text-center relative z-10">
+<div class="max-w-3xl mx-auto">
+    <!-- Brand Mark -->
+    <div class="mb-2">
+        <span class="text-xs tracking-[0.5em] text-gray-500 dark:text-gray-400">EST. <?php echo date('Y');?></span>
+    </div>
 
+    <!-- Main Heading -->
+    <h1 class="text-5xl sm:text-6xl lg:text-7xl font-bold text-black dark:text-white mb-4 leading-tight">
+        <span class="block">DRESS YOUR</span>
+        <span class="block">OWN RHYTHM</span>
+    </h1>
+
+    <!-- Subheading -->
+    <div class="font-serif italic text-xl text-gray-600 dark:text-gray-300 mb-8">
+        "Drake isn’t just fashion — it’s your statement."
+    </div>
+
+    <!-- Description -->
+    <p class="text-lg text-gray-600 dark:text-gray-300 mb-10 max-w-2xl mx-auto leading-relaxed">
+        Clean cuts. Bold fits. Drake is where comfort meets cool — crafted for those who wear their vibe.
+    </p>
+
+    <!-- CTA Buttons -->
+    <div class="flex flex-col sm:flex-row justify-center gap-4 mb-12">
+        <a href="/new-arrivals" class="px-8 py-3 bg-black dark:bg-white text-white dark:text-black hover:bg-gray-800 dark:hover:bg-gray-200 transition-colors duration-300 text-sm uppercase tracking-wider font-medium">
+            Shop New Drops
+        </a>
+        <a href="/collections" class="px-8 py-3 border border-black dark:border-white text-black dark:text-white hover:bg-gray-100 dark:hover:bg-gray-900 transition-colors duration-300 text-sm uppercase tracking-wider font-medium">
+            Browse Collections
+        </a>
+    </div>
+
+    <!-- Additional Elements -->
+    <div class="text-xs uppercase tracking-widest text-gray-400 dark:text-gray-500 space-y-2">
+        <div class="flex items-center justify-center space-x-4">
+            <span>Free Worldwide Shipping</span>
+            <span class="w-1 h-1 bg-gray-400 dark:bg-gray-500 rounded-full"></span>
+            <span>Ethical Materials</span>
+            <span class="w-1 h-1 bg-gray-400 dark:bg-gray-500 rounded-full"></span>
+            <span>Built to Last</span>
+        </div>
+        <div class="mt-4">
+            <span>Drop Alert: Summer '24 Out Now</span>
+        </div>
+    </div>
+</div>
 </div>
 </section>
 
