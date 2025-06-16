@@ -38,7 +38,7 @@ $currentTheme = $_SESSION['theme'] ?? 'light';
 <!-- Hero Section -->
 <section class="relative bg-white dark:bg-black min-h-[80vh] flex items-center overflow-hidden">
     <!-- Square grid background -->
-    <div class="absolute inset-0 grid grid-cols-8 grid-rows-6 gap-px overflow-hidden opacity-10 dark:opacity-[0.08]">
+    <div class="absolute inset-0 grid grid-cols-8 grid-rows-6 gap-px overflow-hidden opacity-10 dark:opacity-[0.8]">
         <!-- Generate grid cells -->
         <?php for ($i = 0; $i < 48; $i++): ?>
             <div class="bg-black dark:bg-white"></div>
@@ -99,6 +99,8 @@ $currentTheme = $_SESSION['theme'] ?? 'light';
         </div>
     </div>
 </div>
+</div>
+</section>
 <!-- Featured Collections -->
 <section class="py-20 bg-white dark:bg-black">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -172,9 +174,79 @@ $currentTheme = $_SESSION['theme'] ?? 'light';
         </div>
     </div>
 </section>
-</div>
-</section>
+<!-- Featured Collections -->
+<section class="py-20 bg-white dark:bg-black">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Section Header -->
+        <div class="text-center mb-16">
+            <h2 class="text-3xl sm:text-4xl font-bold text-black dark:text-white mb-4">CURATED COLLECTIONS</h2>
+            <p class="max-w-2xl mx-auto text-gray-600 dark:text-gray-300">
+                Explore our signature lines—where craftsmanship meets contemporary design.
+            </p>
+        </div>
 
+        <!-- Collection Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Collection 1 -->
+            <div class="group relative overflow-hidden">
+                <div class="aspect-square bg-gray-100 dark:bg-gray-900 flex items-center justify-center">
+                    <!-- Replace with actual image -->
+                    <span class="text-gray-400 dark:text-gray-600">ESSENTIALS COLLECTION</span>
+                </div>
+                <div class="mt-4">
+                    <h3 class="text-lg font-medium text-black dark:text-white">The Essentials</h3>
+                    <p class="mt-1 text-gray-600 dark:text-gray-300 text-sm">
+                        Timeless pieces for everyday wear
+                    </p>
+                    <a href="/collections/essentials" class="mt-3 inline-block text-sm font-medium text-black dark:text-white border-b border-transparent hover:border-black dark:hover:border-white transition-all duration-300">
+                        Discover Now →
+                    </a>
+                </div>
+            </div>
+
+            <!-- Collection 2 -->
+            <div class="group relative overflow-hidden">
+                <div class="aspect-square bg-gray-100 dark:bg-gray-900 flex items-center justify-center">
+                    <!-- Replace with actual image -->
+                    <span class="text-gray-400 dark:text-gray-600">PREMIUM KNITS</span>
+                </div>
+                <div class="mt-4">
+                    <h3 class="text-lg font-medium text-black dark:text-white">Premium Knitwear</h3>
+                    <p class="mt-1 text-gray-600 dark:text-gray-300 text-sm">
+                        Luxurious fabrics for refined comfort
+                    </p>
+                    <a href="/collections/knitwear" class="mt-3 inline-block text-sm font-medium text-black dark:text-white border-b border-transparent hover:border-black dark:hover:border-white transition-all duration-300">
+                        Discover Now →
+                    </a>
+                </div>
+            </div>
+
+            <!-- Collection 3 -->
+            <div class="group relative overflow-hidden">
+                <div class="aspect-square bg-gray-100 dark:bg-gray-900 flex items-center justify-center">
+                    <!-- Replace with actual image -->
+                    <span class="text-gray-400 dark:text-gray-600">TAILORED LINE</span>
+                </div>
+                <div class="mt-4">
+                    <h3 class="text-lg font-medium text-black dark:text-white">Tailored Classics</h3>
+                    <p class="mt-1 text-gray-600 dark:text-gray-300 text-sm">
+                        Precision-cut silhouettes for modern elegance
+                    </p>
+                    <a href="/collections/tailored" class="mt-3 inline-block text-sm font-medium text-black dark:text-white border-b border-transparent hover:border-black dark:hover:border-white transition-all duration-300">
+                        Discover Now →
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- View All CTA -->
+        <div class="text-center mt-16">
+            <a href="/collections" class="px-8 py-3 border border-black dark:border-white text-black dark:text-white hover:bg-gray-100 dark:hover:bg-gray-900 transition-colors duration-300 text-sm uppercase tracking-wider">
+                View All Collections
+            </a>
+        </div>
+    </div>
+</section>
 <style>
     /* Grid animation */
     @keyframes float-1 {
