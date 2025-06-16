@@ -15,7 +15,7 @@ $currentTheme = $_SESSION['theme'] ?? 'light';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Drake Clothing Store</title>
     <script src="/tailwind.js"></script>
-    <link rel="stylesheet" href="includes/font-awesome/css/all.csd">
+    <link rel="stylesheet" href="includes/font-awesome/css/all.css">
     <script>
         tailwind.config = {
             darkMode: 'class',
@@ -33,7 +33,7 @@ $currentTheme = $_SESSION['theme'] ?? 'light';
     </script>
 </head>
 <body class="bg-drake-light dark:bg-drake-dark transition-colors duration-300">
-
+<?php include './includes/nav.php';?>
     <script>
         // Mobile menu toggle
         document.getElementById('mobile-menu-button').addEventListener('click', function() {
