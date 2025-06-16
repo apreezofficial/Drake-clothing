@@ -120,7 +120,6 @@ $tags = json_decode($product['tags'], true);
 </div>
         </div>
     </div>
-
 <script>
 document.addEventListener('DOMContentLoaded', () => {
     let cart = JSON.parse(localStorage.getItem('cart')) || {};
