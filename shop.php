@@ -37,8 +37,8 @@ include 'conn.php';
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <!-- Section Header -->
     <div class="text-center mb-16">
-      <span class="text-xs uppercase tracking-widest text-gray-500 dark:text-gray-400 mb-2 block">Most Coveted</span>
-      <h2 class="text-3xl sm:text-4xl font-bold text-black dark:text-white mb-4">BEST SELLERS</h2>
+      <span class="text-xs uppercase tracking-widest text-gray-500 dark:text-gray-400 mb-2 block">original</span>
+      <h2 class="text-3xl sm:text-4xl font-bold text-black dark:text-white mb-4">Our Clothings</h2>
       <div class="w-20 h-px bg-black dark:bg-white mx-auto"></div>
     </div>
     <?php
@@ -80,13 +80,6 @@ $result = $conn->query($sql);
         <p class="col-span-4 text-center text-gray-500 dark:text-gray-400">No products available.</p>
     <?php endif; ?>
 </div>
-
-    <!-- View All Button -->
-    <div class="text-center mt-16">
-      <a href="/shop" class="inline-block border-b border-black dark:border-white text-black dark:text-white pb-1 font-medium uppercase tracking-wider text-sm hover:opacity-80 transition-opacity">
-        View All Products →
-      </a>
-    </div>
   </div>
 </section>
 <?php include './includes/footer.php';?>
