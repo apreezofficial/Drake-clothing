@@ -67,13 +67,41 @@ $result = $conn->query($sql);
                     <p class="text-gray-500 dark:text-gray-400 text-sm mt-1"><?= htmlspecialchars($row['category']) ?></p>
                     <p class="text-black dark:text-white font-medium mt-2">$<?= number_format($row['price'], 2) ?></p>
                 </div>
-                <!-- Quick add to cart (appears on hover) -->
-                <form method="POST" action="add_to_cart.php">
-                    <input type="hidden" name="product_id" value="<?= $row['id'] ?>">
-                    <button type="submit" class="absolute bottom-20 right-4 bg-black dark:bg-white text-white dark:text-black px-3 py-2 text-xs uppercase tracking-wider opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                        Quick Add
-                    </button>
-                </form>
+<!-- Cart Action Area -->
+<div class="cart-action absolute bottom-20 right-4 flex items-center space-x-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300" data-product-id="<?= $row['id'] ?>">
+
+    <!-- Minus Button -->
+    <button class="minus-btn bg-black dark:bg-white text-white dark:text-black p-2 rounded-full flex items-center justify-center">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M20 12H4" />
+        </svg>
+    </button>
+
+    <!-- Quantity Display -->
+    <span class="quantity text-black dark:text-white font-bold">0</span>
+
+    <!-- Plus Button -->
+    <button class="plus-btn bg-black dark:bg-white text-white dark:text-black p-2 rounded-full flex items-center justify-center">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
+        </svg>
+    </button>
+
+    <!-- Cart Icon -->
+    <button class="cart-btn bg-black dark:bg-white text-white dark:text-black p-2 rounded-full flex items-center justify-center">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2 4h12M9 21h0M15 21h0" />
+        </svg>
+    </button>
+
+    <!-- Cancel Button -->
+    <button class="cancel-btn hidden bg-red-600 text-white p-2 rounded-full flex items-center justify-center">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+    </button>
+
+</div>
             </div>
         <?php endwhile; ?>
     <?php else: ?>
