@@ -338,7 +338,218 @@ $currentTheme = $_SESSION['theme'] ?? 'light';
     </div>
   </div>
 </section>
+<!-- Editorial Lookbook Section -->
+<section class="py-20 bg-white dark:bg-black border-t border-gray-200 dark:border-gray-800">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- Section Header -->
+    <div class="text-center mb-16">
+      <span class="text-xs uppercase tracking-widest text-gray-500 dark:text-gray-400 mb-2 block">The Drake Journal</span>
+      <h2 class="text-3xl sm:text-4xl font-bold text-black dark:text-white mb-4">SPRING EDITORIAL</h2>
+      <p class="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+        Discover the art of intentional dressing through our seasonal narratives
+      </p>
+    </div>
 
+    <!-- Editorial Grid -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+      <!-- Feature Story -->
+      <div class="group relative aspect-[4/5] bg-gray-100 dark:bg-gray-900 overflow-hidden">
+        <!-- Image Placeholder -->
+        <div class="absolute inset-0 bg-gray-300 dark:bg-gray-800 flex items-center justify-center">
+          <span class="text-gray-500 dark:text-gray-400">Editorial Image</span>
+        </div>
+        <!-- Content Overlay -->
+        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent flex items-end p-8">
+          <div>
+            <span class="text-sm text-white/80 mb-2 block">Feature Story</span>
+            <h3 class="text-2xl font-bold text-white mb-3">The Architecture of Movement</h3>
+            <p class="text-white/80 mb-4 max-w-md">Exploring how fabric and form interact in our SS24 collection</p>
+            <a href="/journal/architecture-of-movement" class="text-white border-b border-white/50 pb-1 text-sm uppercase tracking-wider hover:border-white transition-colors">
+              Read Story
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Secondary Stories -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
+        <!-- Story 1 -->
+        <div class="group relative aspect-square bg-gray-100 dark:bg-gray-900 overflow-hidden">
+          <div class="absolute inset-0 bg-gray-200 dark:bg-gray-700 flex items-center justify-center">
+            <span class="text-gray-500 dark:text-gray-400">Editorial Image</span>
+          </div>
+          <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent flex items-end p-6">
+            <div>
+              <h3 class="text-lg font-bold text-white mb-2">Material Origins</h3>
+              <a href="/journal/material-origins" class="text-white/80 border-b border-white/30 pb-1 text-xs uppercase tracking-wider hover:border-white transition-colors">
+                Explore
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Story 2 -->
+        <div class="group relative aspect-square bg-gray-100 dark:bg-gray-900 overflow-hidden">
+          <div class="absolute inset-0 bg-gray-200 dark:bg-gray-700 flex items-center justify-center">
+            <span class="text-gray-500 dark:text-gray-400">Editorial Image</span>
+          </div>
+          <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent flex items-end p-6">
+            <div>
+              <h3 class="text-lg font-bold text-white mb-2">24 Hours in Drake</h3>
+              <a href="/journal/24-hours" class="text-white/80 border-b border-white/30 pb-1 text-xs uppercase tracking-wider hover:border-white transition-colors">
+                View Series
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Story 3 -->
+        <div class="group relative aspect-square bg-gray-100 dark:bg-gray-900 overflow-hidden col-span-1 sm:col-span-2">
+          <div class="absolute inset-0 bg-gray-200 dark:bg-gray-700 flex items-center justify-center">
+            <span class="text-gray-500 dark:text-gray-400">Editorial Image</span>
+          </div>
+          <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent flex items-end p-6">
+            <div>
+              <span class="text-sm text-white/80 mb-2 block">New Series</span>
+              <h3 class="text-xl font-bold text-white mb-3">Designer Dialogues</h3>
+              <a href="/journal/designer-dialogues" class="text-white border-b border-white/50 pb-1 text-sm uppercase tracking-wider hover:border-white transition-colors">
+                Watch Now
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- View All Button -->
+    <div class="text-center mt-16">
+      <a href="/journal" class="inline-block border-b border-black dark:border-white text-black dark:text-white pb-1 font-medium uppercase tracking-wider text-sm hover:opacity-80 transition-opacity">
+        Visit The Journal →
+      </a>
+    </div>
+  </div>
+</section>
+<!-- Testimonials Section -->
+<section class="py-24 bg-white dark:bg-black border-t border-gray-200 dark:border-gray-800">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- Section Header -->
+    <div class="text-center mb-16">
+      <span class="text-xs uppercase tracking-widest text-gray-500 dark:text-gray-400 mb-2 block">Client Voices</span>
+      <h2 class="text-3xl sm:text-4xl font-bold text-black dark:text-white mb-4">WORTH WEARING</h2>
+      <div class="w-20 h-px bg-black dark:bg-white mx-auto"></div>
+    </div>
+
+    <!-- Testimonial Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
+      <!-- Testimonial 1 -->
+      <div class="relative">
+        <div class="absolute -top-6 -left-6 text-7xl text-gray-100 dark:text-gray-900 font-serif">"</div>
+        <blockquote class="relative z-10 pt-8">
+          <p class="text-lg text-gray-600 dark:text-gray-300 mb-6">
+            The cashmere knitwear exceeded all expectations. Six months of heavy wear and it still looks brand new. This is why I keep coming back to Drake.
+          </p>
+          <footer class="flex items-center">
+            <div class="w-12 h-12 rounded-full bg-gray-200 dark:bg-gray-800 mr-4 overflow-hidden">
+              <!-- Customer image placeholder -->
+              <div class="w-full h-full flex items-center justify-center text-gray-400">JP</div>
+            </div>
+            <div>
+              <div class="font-medium text-black dark:text-white">James P.</div>
+              <div class="text-sm text-gray-500 dark:text-gray-400">Verified Customer</div>
+            </div>
+          </footer>
+        </blockquote>
+      </div>
+
+      <!-- Testimonial 2 -->
+      <div class="relative">
+        <div class="absolute -top-6 -left-6 text-7xl text-gray-100 dark:text-gray-900 font-serif">"</div>
+        <blockquote class="relative z-10 pt-8">
+          <p class="text-lg text-gray-600 dark:text-gray-300 mb-6">
+            I've never owned a blazer that fits so perfectly off the rack. The tailoring details make all the difference. Worth every penny.
+          </p>
+          <footer class="flex items-center">
+            <div class="w-12 h-12 rounded-full bg-gray-200 dark:bg-gray-800 mr-4 overflow-hidden">
+              <div class="w-full h-full flex items-center justify-center text-gray-400">SR</div>
+            </div>
+            <div>
+              <div class="font-medium text-black dark:text-white">Sarah R.</div>
+              <div class="text-sm text-gray-500 dark:text-gray-400">Since 2022</div>
+            </div>
+          </footer>
+        </blockquote>
+      </div>
+
+      <!-- Testimonial 3 -->
+      <div class="relative">
+        <div class="absolute -top-6 -left-6 text-7xl text-gray-100 dark:text-gray-900 font-serif">"</div>
+        <blockquote class="relative z-10 pt-8">
+          <p class="text-lg text-gray-600 dark:text-gray-300 mb-6">
+            Their minimalist approach means everything pairs perfectly. I've halved my wardrobe but doubled my outfit options since switching to Drake.
+          </p>
+          <footer class="flex items-center">
+            <div class="w-12 h-12 rounded-full bg-gray-200 dark:bg-gray-800 mr-4 overflow-hidden">
+              <div class="w-full h-full flex items-center justify-center text-gray-400">ML</div>
+            </div>
+            <div>
+              <div class="font-medium text-black dark:text-white">Michael L.</div>
+              <div class="text-sm text-gray-500 dark:text-gray-400">Style Advisor</div>
+            </div>
+          </footer>
+        </blockquote>
+      </div>
+    </div>
+
+    <!-- View All Button -->
+    <div class="text-center mt-20">
+      <a href="/reviews" class="inline-block border-b border-black dark:border-white text-black dark:text-white pb-1 font-medium uppercase tracking-wider text-sm hover:opacity-80 transition-opacity">
+        Read More Testimonials →
+      </a>
+    </div>
+  </div>
+</section>
+<!-- Newsletter Section -->
+<section class="py-24 bg-gray-50 dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800">
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+    <!-- Envelope Icon -->
+    <div class="mx-auto w-16 h-16 bg-black dark:bg-white text-white dark:text-black flex items-center justify-center mb-8">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+      </svg>
+    </div>
+
+    <!-- Heading -->
+    <h2 class="text-3xl sm:text-4xl font-bold text-black dark:text-white mb-4">Stay Connected</h2>
+    
+    <!-- Subheading -->
+    <p class="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto mb-10">
+      Subscribe for exclusive early access to new collections, private events, and 10% off your first order.
+    </p>
+
+    <!-- Signup Form -->
+    <form class="max-w-md mx-auto">
+      <div class="flex flex-col sm:flex-row gap-4">
+        <input 
+          type="email" 
+          placeholder="Your email address" 
+          class="flex-1 px-4 py-3 border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-black dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-1 focus:ring-black dark:focus:ring-white"
+          required
+        >
+        <button 
+          type="submit" 
+          class="px-6 py-3 bg-black dark:bg-white text-white dark:text-black hover:bg-gray-800 dark:hover:bg-gray-200 transition-colors duration-300 uppercase tracking-wider text-sm font-medium"
+        >
+          Subscribe
+        </button>
+      </div>
+    </form>
+
+    <!-- Privacy Note -->
+    <p class="text-xs text-gray-400 dark:text-gray-500 mt-6">
+      We respect your privacy. Unsubscribe at any time.
+    </p>
+  </div>
+</section>
 <style>
     /* Grid animation */
     @keyframes float-1 {
