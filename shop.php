@@ -1,16 +1,12 @@
 <?php
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
 include 'conn.php';
 ?>
-
 <!DOCTYPE html>
 <html lang="en" class="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Drake Clothing Store</title>
+    <title>Drake Clothing Store - Shop</title>
     <script src="/tailwind.js"></script>
     <link rel="stylesheet" href="includes/font-awesome/css/all.css">
     <script>
@@ -52,7 +48,7 @@ $result = $conn->query($sql);
 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
     <?php if ($result && $result->num_rows > 0): ?>
         <?php while ($row = $result->fetch_assoc()): ?>
-            <div class="group relative">
+            <div class="product-card group relative">
                 <div class="aspect-square bg-gray-100 dark:bg-gray-800 overflow-hidden">
                     <?php if (!empty($row['image_url'])): ?>
                         <img src="<?= $row['image_url'] ?>" alt="<?= htmlspecialchars($row['product_name']) ?>" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
@@ -62,13 +58,24 @@ $result = $conn->query($sql);
                         </div>
                     <?php endif; ?>
                 </div>
-                <div class="mt-4">
-                    <h3 class="text-lg font-medium text-black dark:text-white"><?= htmlspecialchars($row['product_name']) ?></h3>
-                    <p class="text-gray-500 dark:text-gray-400 text-sm mt-1"><?= htmlspecialchars($row['category']) ?></p>
-                    <p class="text-black dark:text-white font-medium mt-2">$<?= number_format($row['price'], 2) ?></p>
-                </div>
+<div class="mt-4">
+    <h3 class="text-lg font-medium text-black dark:text-white">
+        <?= htmlspecialchars($row['product_name']) ?>
+    </h3>
+    <p class="text-gray-500 dark:text-gray-400 text-sm mt-1">
+        <?= htmlspecialchars($row['category']) ?>
+    </p>
+    <p class="text-black dark:text-white font-medium mt-2">
+        $<?= number_format($row['price'], 2) ?>
+    </p>
+
+    <!-- View Button -->
+    <a href="product.php?id=<?= $row['id'] ?>" class="inline-block mt-3 bg-black dark:bg-white text-white dark:text-black px-4 py-2 rounded-full text-sm font-medium hover:bg-gray-800 dark:hover:bg-gray-300 transition duration-300">
+        View
+    </a>
+</div>
 <!-- Cart Action Area -->
-<div class="cart-action absolute bottom-20 right-4 flex items-center space-x-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300" data-product-id="<?= $row['id'] ?>">
+<div class="cart-action absolute bottom-20 right-4 flex items-center space-x-2" data-product-id="<?= $row['id'] ?>">
 
     <!-- Minus Button -->
     <button class="minus-btn bg-black dark:bg-white text-white dark:text-black p-2 rounded-full flex items-center justify-center">
@@ -112,74 +119,62 @@ $result = $conn->query($sql);
 </section>
 <script>
 document.addEventListener('DOMContentLoaded', () => {
-    const updateInterval = 100; // 100ms fast update
     let cart = JSON.parse(localStorage.getItem('cart')) || {};
-
-    function updateCartDisplay() {
-        document.querySelectorAll('.cart-action').forEach(cartAction => {
-            const productId = cartAction.getAttribute('data-product-id');
-            const quantityDisplay = cartAction.querySelector('.quantity');
-            const cancelBtn = cartAction.querySelector('.cancel-btn');
-
-            if (cart[productId]) {
-                quantityDisplay.textContent = cart[productId];
-                cancelBtn.classList.remove('hidden');
-            } else {
-                quantityDisplay.textContent = '0';
-                cancelBtn.classList.add('hidden');
-            }
-        });
-    }
 
     function saveCart() {
         localStorage.setItem('cart', JSON.stringify(cart));
     }
 
-    document.querySelectorAll('.plus-btn').forEach(button => {
-        button.addEventListener('click', (e) => {
-            const cartAction = e.target.closest('.cart-action');
-            const productId = cartAction.getAttribute('data-product-id');
+    function updateProductDisplay(cartAction) {
+        const productId = cartAction.getAttribute('data-product-id');
+        const quantityDisplay = cartAction.querySelector('.quantity');
+        const cancelBtn = cartAction.querySelector('.cancel-btn');
 
+        if (cart[productId]) {
+            quantityDisplay.textContent = cart[productId];
+            cancelBtn.classList.remove('hidden');
+        } else {
+            quantityDisplay.textContent = '0';
+            cancelBtn.classList.add('hidden');
+        }
+    }
+
+    document.querySelectorAll('.cart-action').forEach(cartAction => {
+        const productId = cartAction.getAttribute('data-product-id');
+        const plusBtn = cartAction.querySelector('.plus-btn');
+        const minusBtn = cartAction.querySelector('.minus-btn');
+        const cancelBtn = cartAction.querySelector('.cancel-btn');
+        const cartBtn = cartAction.querySelector('.cart-btn');
+
+        // Initialize display if cart already has items
+        updateProductDisplay(cartAction);
+
+        plusBtn.addEventListener('click', () => {
             cart[productId] = (cart[productId] || 0) + 1;
             saveCart();
-            updateCartDisplay();
+            updateProductDisplay(cartAction);
         });
-    });
 
-    document.querySelectorAll('.minus-btn').forEach(button => {
-        button.addEventListener('click', (e) => {
-            const cartAction = e.target.closest('.cart-action');
-            const productId = cartAction.getAttribute('data-product-id');
-
+        minusBtn.addEventListener('click', () => {
             if (cart[productId] > 1) {
                 cart[productId] -= 1;
             } else {
                 delete cart[productId];
             }
             saveCart();
-            updateCartDisplay();
+            updateProductDisplay(cartAction);
         });
-    });
 
-    document.querySelectorAll('.cancel-btn').forEach(button => {
-        button.addEventListener('click', (e) => {
-            const cartAction = e.target.closest('.cart-action');
-            const productId = cartAction.getAttribute('data-product-id');
-
+        cancelBtn.addEventListener('click', () => {
             delete cart[productId];
             saveCart();
-            updateCartDisplay();
+            updateProductDisplay(cartAction);
         });
-    });
 
-    document.querySelectorAll('.cart-btn').forEach(button => {
-        button.addEventListener('click', () => {
+        cartBtn.addEventListener('click', () => {
             alert('Go to Cart (optional: redirect or open modal)');
         });
     });
-
-    // Fast real-time UI sync
-    setInterval(updateCartDisplay, updateInterval);
 });
 </script>
 <?php include './includes/footer.php';?>
