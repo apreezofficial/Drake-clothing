@@ -74,41 +74,6 @@ $result = $conn->query($sql);
         View
     </a>
 </div>
-<!-- Cart Action Area -->
-<div class="cart-action absolute bottom-20 right-4 flex items-center space-x-2" data-product-id="<?= $row['id'] ?>">
-
-    <!-- Minus Button -->
-    <button class="minus-btn bg-black dark:bg-white text-white dark:text-black p-2 rounded-full flex items-center justify-center">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M20 12H4" />
-        </svg>
-    </button>
-
-    <!-- Quantity Display -->
-    <span class="quantity text-black dark:text-white font-bold">0</span>
-
-    <!-- Plus Button -->
-    <button class="plus-btn bg-black dark:bg-white text-white dark:text-black p-2 rounded-full flex items-center justify-center">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
-        </svg>
-    </button>
-
-    <!-- Cart Icon -->
-    <button class="cart-btn bg-black dark:bg-white text-white dark:text-black p-2 rounded-full flex items-center justify-center">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2 4h12M9 21h0M15 21h0" />
-        </svg>
-    </button>
-
-    <!-- Cancel Button -->
-    <button class="cancel-btn hidden bg-red-600 text-white p-2 rounded-full flex items-center justify-center">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-        </svg>
-    </button>
-
-</div>
             </div>
         <?php endwhile; ?>
     <?php else: ?>
@@ -117,66 +82,6 @@ $result = $conn->query($sql);
 </div>
   </div>
 </section>
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-    let cart = JSON.parse(localStorage.getItem('cart')) || {};
-
-    function saveCart() {
-        localStorage.setItem('cart', JSON.stringify(cart));
-    }
-
-    function updateProductDisplay(cartAction) {
-        const productId = cartAction.getAttribute('data-product-id');
-        const quantityDisplay = cartAction.querySelector('.quantity');
-        const cancelBtn = cartAction.querySelector('.cancel-btn');
-
-        if (cart[productId]) {
-            quantityDisplay.textContent = cart[productId];
-            cancelBtn.classList.remove('hidden');
-        } else {
-            quantityDisplay.textContent = '0';
-            cancelBtn.classList.add('hidden');
-        }
-    }
-
-    document.querySelectorAll('.cart-action').forEach(cartAction => {
-        const productId = cartAction.getAttribute('data-product-id');
-        const plusBtn = cartAction.querySelector('.plus-btn');
-        const minusBtn = cartAction.querySelector('.minus-btn');
-        const cancelBtn = cartAction.querySelector('.cancel-btn');
-        const cartBtn = cartAction.querySelector('.cart-btn');
-
-        // Initialize display if cart already has items
-        updateProductDisplay(cartAction);
-
-        plusBtn.addEventListener('click', () => {
-            cart[productId] = (cart[productId] || 0) + 1;
-            saveCart();
-            updateProductDisplay(cartAction);
-        });
-
-        minusBtn.addEventListener('click', () => {
-            if (cart[productId] > 1) {
-                cart[productId] -= 1;
-            } else {
-                delete cart[productId];
-            }
-            saveCart();
-            updateProductDisplay(cartAction);
-        });
-
-        cancelBtn.addEventListener('click', () => {
-            delete cart[productId];
-            saveCart();
-            updateProductDisplay(cartAction);
-        });
-
-        cartBtn.addEventListener('click', () => {
-            alert('Go to Cart (optional: redirect or open modal)');
-        });
-    });
-});
-</script>
 <?php include './includes/footer.php';?>
 </body>
 </html>
