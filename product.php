@@ -24,9 +24,26 @@ error_reporting(1);
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <title><?= htmlspecialchars($product['product_name']) ?> - Shop</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+      <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drake Clothing Store - <?= htmlspecialchars($product['product_name']) ?></title>
+    <script src="/tailwind.js"></script>
+    <link rel="stylesheet" href="includes/font-awesome/css/all.css">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        drake: {
+                            light: '#ffffff',
+                            dark: '#000000',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
 </head>
 
 <body class="bg-gray-100 dark:bg-gray-900 min-h-screen flex flex-col">
