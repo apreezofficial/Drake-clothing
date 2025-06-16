@@ -66,10 +66,24 @@ error_reporting(1);
             <p class="text-gray-600 dark:text-gray-300">
                 <?= htmlspecialchars($product['description']) ?>
             </p>
+<?php
+$tags = json_decode($product['tags'], true);
+?>
+<div id="tag-selectors" class="space-y-4 mt-4">
 
+    <?php foreach ($tags as $tagType => $tagOptions): ?>
+        <div>
+            <label class="block mb-2 font-semibold text-black dark:text-white"><?= ucfirst($tagType) ?> Available:</label>
+            <select class="tag-select p-2 rounded border w-full dark:bg-gray-800 dark:text-white" data-tag-type="<?= htmlspecialchars($tagType) ?>">
+                <option value="">Select <?= ucfirst($tagType) ?></option>
+                <?php foreach ($tagOptions as $option): ?>
+                    <option value="<?= htmlspecialchars($option) ?>"><?= htmlspecialchars($option) ?></option>
+                <?php endforeach; ?>
+            </select>
+        </div>
+    <?php endforeach; ?>
 
-
-
+</div>
 <div class="cart-action flex items-center space-x-3 mt-6" data-product-id="<?= $product['id'] ?>">
 
     <!-- Minus Button -->
@@ -110,9 +124,14 @@ error_reporting(1);
 <script>
 document.addEventListener('DOMContentLoaded', () => {
     let cart = JSON.parse(localStorage.getItem('cart')) || {};
+    let userSelections = JSON.parse(localStorage.getItem('userSelections')) || {}; // New for tags
 
     function saveCart() {
         localStorage.setItem('cart', JSON.stringify(cart));
+    }
+
+    function saveUserSelections() {
+        localStorage.setItem('userSelections', JSON.stringify(userSelections));
     }
 
     function updateProductDisplay() {
@@ -129,15 +148,14 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Elements for this single product page
+    // Initialize display
+    updateProductDisplay();
+
     const productId = "<?= $product['id'] ?>";
     const plusBtn = document.querySelector('.plus-btn');
     const minusBtn = document.querySelector('.minus-btn');
     const cancelBtn = document.querySelector('.cancel-btn');
     const cartBtn = document.querySelector('.cart-btn');
-
-    // Initialize display
-    updateProductDisplay();
 
     plusBtn.addEventListener('click', () => {
         cart[productId] = (cart[productId] || 0) + 1;
@@ -157,7 +175,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     cancelBtn.addEventListener('click', () => {
         delete cart[productId];
+        delete userSelections[productId];
         saveCart();
+        saveUserSelections();
         updateProductDisplay();
     });
 
@@ -165,9 +185,42 @@ document.addEventListener('DOMContentLoaded', () => {
         // Optional: Redirect to cart page or open modal
         window.location.href = 'cart.php'; // You can customize this
     });
+
+    // 🛠️ Handle Tag Selections
+    const tagSelectors = document.querySelectorAll('.tag-select');
+    tagSelectors.forEach(select => {
+        select.addEventListener('change', () => {
+            const tagType = select.getAttribute('data-tag-type');
+            const selectedValue = select.value;
+
+            if (!userSelections[productId]) {
+                userSelections[productId] = {};
+            }
+
+            userSelections[productId][tagType] = selectedValue;
+            saveUserSelections();
+
+            console.log(`User-message: ${formatUserMessage(productId)}`);
+        });
+    });
+
+    // 🎯 Format User Message
+    function formatUserMessage(productId) {
+        if (!userSelections[productId]) return '';
+
+        const selections = userSelections[productId];
+        const messages = [];
+
+        for (let [key, value] of Object.entries(selections)) {
+            if (value) {
+                messages.push(`${key}-${value}`);
+            }
+        }
+
+        return messages.join(' and ');
+    }
 });
 </script>
-<?php include './includes/footer.php';?>
 </body>
 
 </html>
