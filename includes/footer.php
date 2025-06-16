@@ -52,7 +52,7 @@
 
         <!-- Footer Bottom -->
         <div class="mt-12 border-t border-gray-200 dark:border-gray-800 pt-6 flex flex-col sm:flex-row justify-between items-center text-gray-600 dark:text-gray-400 text-sm">
-            <p>&copy; 2025 DRAKE. All rights reserved.</p>
+            <p>&copy; <?php echo date("Y") ; ?> DRAKE. All rights reserved.</p>
             <div class="flex space-x-4 mt-4 sm:mt-0">
                 <a href="/privacy" class="hover:underline">Privacy Policy</a>
                 <a href="/terms" class="hover:underline">Terms of Service</a>

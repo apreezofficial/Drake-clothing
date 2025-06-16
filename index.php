@@ -30,7 +30,7 @@ include 'conn.php';
         }
     </script>
 </head>
-<body class="bg-drake-light dark:bg-drake-dark transition-colors duration-300">
+<body class="bg-drake-light dark:bg-drake-dark">
 <?php include './includes/nav.php';?>
 <div style="height:60px;"></div>
 <!-- Hero Section -->
