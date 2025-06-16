@@ -110,6 +110,78 @@ $result = $conn->query($sql);
 </div>
   </div>
 </section>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const updateInterval = 100; // 100ms fast update
+    let cart = JSON.parse(localStorage.getItem('cart')) || {};
+
+    function updateCartDisplay() {
+        document.querySelectorAll('.cart-action').forEach(cartAction => {
+            const productId = cartAction.getAttribute('data-product-id');
+            const quantityDisplay = cartAction.querySelector('.quantity');
+            const cancelBtn = cartAction.querySelector('.cancel-btn');
+
+            if (cart[productId]) {
+                quantityDisplay.textContent = cart[productId];
+                cancelBtn.classList.remove('hidden');
+            } else {
+                quantityDisplay.textContent = '0';
+                cancelBtn.classList.add('hidden');
+            }
+        });
+    }
+
+    function saveCart() {
+        localStorage.setItem('cart', JSON.stringify(cart));
+    }
+
+    document.querySelectorAll('.plus-btn').forEach(button => {
+        button.addEventListener('click', (e) => {
+            const cartAction = e.target.closest('.cart-action');
+            const productId = cartAction.getAttribute('data-product-id');
+
+            cart[productId] = (cart[productId] || 0) + 1;
+            saveCart();
+            updateCartDisplay();
+        });
+    });
+
+    document.querySelectorAll('.minus-btn').forEach(button => {
+        button.addEventListener('click', (e) => {
+            const cartAction = e.target.closest('.cart-action');
+            const productId = cartAction.getAttribute('data-product-id');
+
+            if (cart[productId] > 1) {
+                cart[productId] -= 1;
+            } else {
+                delete cart[productId];
+            }
+            saveCart();
+            updateCartDisplay();
+        });
+    });
+
+    document.querySelectorAll('.cancel-btn').forEach(button => {
+        button.addEventListener('click', (e) => {
+            const cartAction = e.target.closest('.cart-action');
+            const productId = cartAction.getAttribute('data-product-id');
+
+            delete cart[productId];
+            saveCart();
+            updateCartDisplay();
+        });
+    });
+
+    document.querySelectorAll('.cart-btn').forEach(button => {
+        button.addEventListener('click', () => {
+            alert('Go to Cart (optional: redirect or open modal)');
+        });
+    });
+
+    // Fast real-time UI sync
+    setInterval(updateCartDisplay, updateInterval);
+});
+</script>
 <?php include './includes/footer.php';?>
 </body>
 </html>
