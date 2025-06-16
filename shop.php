@@ -36,11 +36,7 @@ include 'conn.php';
 <section class="py-20 bg-gray-50 dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <!-- Section Header -->
-    <div class="text-center mb-16">
-      <span class="text-xs uppercase tracking-widest text-gray-500 dark:text-gray-400 mb-2 block">original</span>
-      <h2 class="text-3xl sm:text-4xl font-bold text-black dark:text-white mb-4">Our Clothings</h2>
-      <div class="w-20 h-px bg-black dark:bg-white mx-auto"></div>
-    </div>
+    
     <?php
 
 // Fetch products from DB
