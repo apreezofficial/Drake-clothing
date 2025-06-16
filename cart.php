@@ -1,6 +1,30 @@
-<?php include './includes/nav.php'; ?>
-<body class="bg-drake-light dark:bg-drake-dark min-h-screen">
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+      <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drake Clothing Store - <?= htmlspecialchars($product['product_name']) ?></title>
+    <script src="/tailwind.js"></script>
+    <link rel="stylesheet" href="includes/font-awesome/css/all.css">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        drake: {
+                            light: '#ffffff',
+                            dark: '#000000',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-drake-light dark:bg-drake-dark min-h-screen">
+<?php include './includes/nav.php'; ?>
 <div style="height: 60px;"></div>
 
 <div class="container mx-auto p-4">
