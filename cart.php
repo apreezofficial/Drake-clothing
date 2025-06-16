@@ -14,11 +14,26 @@
         <a href="checkout.php" class="bg-black dark:bg-white text-white dark:text-black px-6 py-3 rounded-full hover:bg-gray-800 dark:hover:bg-gray-300 transition duration-300">Proceed to Checkout</a>
     </div>
 </div>
-
 <script>
 document.addEventListener('DOMContentLoaded', () => {
     const cartContainer = document.getElementById('cart-container');
     const cart = JSON.parse(localStorage.getItem('cart')) || {};
+
+    function formatOptions(options) {
+        if (!options || typeof options !== 'object' || Object.keys(options).length === 0) {
+            return 'None';
+        }
+
+        const formatted = Object.entries(options).map(([key, value]) => {
+            return `${capitalize(key)}: ${capitalize(value)}`;
+        });
+
+        return formatted.join(' | ');
+    }
+
+    function capitalize(str) {
+        return str.charAt(0).toUpperCase() + str.slice(1);
+    }
 
     function displayCart() {
         cartContainer.innerHTML = '';
@@ -31,7 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
         Object.keys(cart).forEach(productId => {
             const item = cart[productId];
             const cartItem = document.createElement('div');
-            cartItem.className = 'flex flex-col md:flex-row items-center justify-between bg-white dark:bg-gray-800 p-4 rounded-2xl shadow-lg';
+            cartItem.className = 'flex flex-col md:flex-row items-center justify-between bg-white dark:bg-gray-800 p-4 rounded-2xl shadow-lg mb-4';
 
             cartItem.innerHTML = `
                 <div class="flex items-center space-x-4">
@@ -40,10 +55,10 @@ document.addEventListener('DOMContentLoaded', () => {
                         <h2 class="text-xl font-bold text-black dark:text-white">${item.name}</h2>
                         <p class="text-gray-600 dark:text-gray-400">Price: $${parseFloat(item.price).toFixed(2)}</p>
                         <p class="text-gray-600 dark:text-gray-400">Quantity: ${item.quantity}</p>
-                        <p class="text-gray-600 dark:text-gray-400">Options: ${item.options}</p>
+                        <p class="text-gray-600 dark:text-gray-400">Options: ${formatOptions(item.options)}</p>
                     </div>
                 </div>
-                <button class="remove-btn bg-red-600 text-white px-4 py-2 rounded-full hover:bg-red-700 transition duration-300" data-id="${productId}">Remove</button>
+                <button class="remove-btn bg-red-600 text-white px-4 py-2 rounded-full hover:bg-red-700 transition duration-300 mt-4 md:mt-0" data-id="${productId}">Remove</button>
             `;
 
             cartContainer.appendChild(cartItem);

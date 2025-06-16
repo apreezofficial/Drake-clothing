@@ -124,14 +124,9 @@ $tags = json_decode($product['tags'], true);
 <script>
 document.addEventListener('DOMContentLoaded', () => {
     let cart = JSON.parse(localStorage.getItem('cart')) || {};
-    let userSelections = JSON.parse(localStorage.getItem('userSelections')) || {}; // New for tags
 
     function saveCart() {
         localStorage.setItem('cart', JSON.stringify(cart));
-    }
-
-    function saveUserSelections() {
-        localStorage.setItem('userSelections', JSON.stringify(userSelections));
     }
 
     function updateProductDisplay() {
@@ -140,7 +135,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const productId = "<?= $product['id'] ?>";
 
         if (cart[productId]) {
-            quantityDisplay.textContent = cart[productId];
+            quantityDisplay.textContent = cart[productId].quantity;
             cancelBtn.classList.remove('hidden');
         } else {
             quantityDisplay.textContent = '0';
@@ -157,15 +152,54 @@ document.addEventListener('DOMContentLoaded', () => {
     const cancelBtn = document.querySelector('.cancel-btn');
     const cartBtn = document.querySelector('.cart-btn');
 
+    // 🏷️ Handle Tag Selections
+    let userOptions = {};
+    const tagSelectors = document.querySelectorAll('.tag-select');
+    tagSelectors.forEach(select => {
+        select.addEventListener('change', () => {
+            const tagType = select.getAttribute('data-tag-type');
+            const selectedValue = select.value;
+
+            userOptions[tagType] = selectedValue;
+
+            console.log(`User-message: ${formatUserMessage(userOptions)}`);
+        });
+    });
+
+    // 🎯 Format User Message
+    function formatUserMessage(options) {
+        const messages = [];
+
+        for (let [key, value] of Object.entries(options)) {
+            if (value) {
+                messages.push(`${key}-${value}`);
+            }
+        }
+
+        return messages.join(' and ');
+    }
+
     plusBtn.addEventListener('click', () => {
-        cart[productId] = (cart[productId] || 0) + 1;
+        cart[productId] = cart[productId] || {
+            name: "<?= htmlspecialchars($product['product_name']) ?>",
+            price: "<?= $product['price'] ?>",
+            image: "<?= htmlspecialchars($product['product_image']) ?>",
+            quantity: 0,
+            options: {}
+        };
+
+        cart[productId].quantity += 1;
+
+        // Save the latest selected options
+        cart[productId].options = userOptions;
+
         saveCart();
         updateProductDisplay();
     });
 
     minusBtn.addEventListener('click', () => {
-        if (cart[productId] > 1) {
-            cart[productId] -= 1;
+        if (cart[productId] && cart[productId].quantity > 1) {
+            cart[productId].quantity -= 1;
         } else {
             delete cart[productId];
         }
@@ -175,50 +209,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     cancelBtn.addEventListener('click', () => {
         delete cart[productId];
-        delete userSelections[productId];
         saveCart();
-        saveUserSelections();
         updateProductDisplay();
     });
 
     cartBtn.addEventListener('click', () => {
-        // Optional: Redirect to cart page or open modal
-        window.location.href = 'cart.php'; // You can customize this
+        window.location.href = 'cart.php';
     });
-
-    // 🛠️ Handle Tag Selections
-    const tagSelectors = document.querySelectorAll('.tag-select');
-    tagSelectors.forEach(select => {
-        select.addEventListener('change', () => {
-            const tagType = select.getAttribute('data-tag-type');
-            const selectedValue = select.value;
-
-            if (!userSelections[productId]) {
-                userSelections[productId] = {};
-            }
-
-            userSelections[productId][tagType] = selectedValue;
-            saveUserSelections();
-
-            console.log(`User-message: ${formatUserMessage(productId)}`);
-        });
-    });
-
-    // 🎯 Format User Message
-    function formatUserMessage(productId) {
-        if (!userSelections[productId]) return '';
-
-        const selections = userSelections[productId];
-        const messages = [];
-
-        for (let [key, value] of Object.entries(selections)) {
-            if (value) {
-                messages.push(`${key}-${value}`);
-            }
-        }
-
-        return messages.join(' and ');
-    }
 });
 </script>
 </body>
