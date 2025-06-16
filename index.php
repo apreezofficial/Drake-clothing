@@ -34,40 +34,8 @@ $currentTheme = $_SESSION['theme'] ?? 'light';
 </head>
 <body class="bg-drake-light dark:bg-drake-dark transition-colors duration-300">
 <?php include './includes/nav.php';?>
-    <script>
-        // Mobile menu toggle
-        document.getElementById('mobile-menu-button').addEventListener('click', function() {
-            const menu = document.getElementById('mobile-menu');
-            menu.classList.toggle('hidden');
-        });
 
-        // Theme toggle
-        document.getElementById('theme-toggle').addEventListener('click', function() {
-            const html = document.documentElement;
-            const isDark = html.classList.contains('dark');
-            
-            // Toggle the class
-            html.classList.toggle('dark');
-            
-            // Update icon
-            const icon = this.querySelector('i');
-            if (isDark) {
-                icon.classList.remove('fa-sun');
-                icon.classList.add('fa-moon');
-            } else {
-                icon.classList.remove('fa-moon');
-                icon.classList.add('fa-sun');
-            }
-            
-            // Send request to save theme preference
-            fetch('/theme-toggle.php', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ theme: isDark ? 'light' : 'dark' })
-            });
-        });
-    </script>
+
+<?php include './includes/footer.php';?>
 </body>
 </html>
