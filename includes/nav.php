@@ -1,3 +1,6 @@
+<?php
+$currentTheme = 'theme'?? 'light';
+?>
 <!-- Navbar -->
 <nav class="bg-white dark:bg-black border-b border-gray-200 dark:border-gray-800 fixed w-full z-50">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -20,32 +23,27 @@
 
                 <!-- Desktop navigation -->
                 <div class="hidden sm:ml-6 sm:flex sm:space-x-4">
-                    <a href="/shop" class="px-3 py-2 rounded-md text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-900">Shop</a>
-                    <a href="/collections" class="px-3 py-2 rounded-md text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-900">Collections</a>
-                    <a href="/about" class="px-3 py-2 rounded-md text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-900">About</a>
+                    <a href="/shop.php" class="px-3 py-2 rounded-md text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-900">Shop</a>
+                    <a href="/collections.php" class="px-3 py-2 rounded-md text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-900">Collections</a>
+                    <a href="/about.php" class="px-3 py-2 rounded-md text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-900">About</a>
                 </div>
             </div>
 
             <!-- Right section -->
             <div class="flex items-center space-x-2">
-                <!-- Search -->
-                <button class="p-2 text-black dark:text-white hover:bg-gray-100 dark:hover:bg-gray-900 rounded-md">
-                    <i class="fas fa-search"></i>
-                </button>
-
-                <!-- Desktop theme toggle -->
-                <button id="theme-toggle" class="hidden sm:block p-2 text-black dark:text-white hover:bg-gray-100 dark:hover:bg-gray-900 rounded-md">
+              <!-- Desktop theme toggle -->
+                <button id="theme-toggle" class="sm:block p-2 text-black dark:text-white hover:bg-gray-100 dark:hover:bg-gray-900 rounded-md">
                     <i id="theme-icon" class="fas fa-moon"></i>
                 </button>
 
                 <!-- Account -->
-                <a href="/account" class="p-2 text-black dark:text-white hover:bg-gray-100 dark:hover:bg-gray-900 rounded-md">
+                <a href="/track.php" class="p-2 text-black dark:text-white hover:bg-gray-100 dark:hover:bg-gray-900 rounded-md">
                     <i class="fas fa-user"></i>
                 </a>
 
                 <!-- Cart -->
                 <div class="relative">
-                    <a href="/cart" class="p-2 text-black dark:text-white hover:bg-gray-100 dark:hover:bg-gray-900 rounded-md">
+                    <a href="/cart.php" class="p-2 text-black dark:text-white hover:bg-gray-100 dark:hover:bg-gray-900 rounded-md">
                         <i class="fas fa-shopping-bag"></i>
                         <span class="cart-count absolute -top-1 -right-1 bg-black dark:bg-white text-white dark:text-black text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">0</span>
                     </a>
@@ -72,9 +70,9 @@
         <div class="flex-1 flex flex-col space-y-6 mt-4">
             <a href="/" class="text-xl font-bold text-black dark:text-white mb-6">DRAKE</a>
 
-            <a href="/shop" class="px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-900">Shop</a>
-            <a href="/collections" class="px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-900">Collections</a>
-            <a href="/about" class="px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-900">About</a>
+            <a href="/shop.php" class="px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-900">Shop</a>
+            <a href="/collections.php" class="px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-900">Collections</a>
+            <a href="/about.php" class="px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-900">About</a>
 
             <!-- Theme toggle -->
             <div class="mt-auto pt-6 border-t border-gray-200 dark:border-gray-800">

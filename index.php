@@ -3,9 +3,7 @@
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
-
-// Check current theme - default to light
-$currentTheme = $_SESSION['theme'] ?? 'light';
+include 'conn.php';
 ?>
 
 <!DOCTYPE html>
@@ -112,132 +110,40 @@ $currentTheme = $_SESSION['theme'] ?? 'light';
             </p>
         </div>
 
-        <!-- Collection Grid -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <!-- Collection 1 -->
+<?php
+
+// Fetch collections from DB
+$sql_c = "SELECT * FROM collections ORDER BY created_at DESC";
+$result = $conn->query($sql_c);
+?>
+
+<!-- Collection Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+    <?php if ($result && $result->num_rows > 0): ?>
+        <?php while ($row = $result->fetch_assoc()): ?>
             <div class="group relative overflow-hidden">
                 <div class="aspect-square bg-gray-100 dark:bg-gray-900 flex items-center justify-center">
-                    <!-- Replace with actual image -->
-                    <span class="text-gray-400 dark:text-gray-600">ESSENTIALS COLLECTION</span>
+                    <?php if (!empty($row['image_url'])): ?>
+                        <img src="<?= $row['image_url'] ?>" alt="<?= htmlspecialchars($row['name']) ?>" class="w-full h-full object-cover">
+                    <?php else: ?>
+                        <span class="text-gray-400 dark:text-gray-600"><?= strtoupper(htmlspecialchars($row['name'])) ?></span>
+                    <?php endif; ?>
                 </div>
                 <div class="mt-4">
-                    <h3 class="text-lg font-medium text-black dark:text-white">The Essentials</h3>
+                    <h3 class="text-lg font-medium text-black dark:text-white"><?= htmlspecialchars($row['name']) ?></h3>
                     <p class="mt-1 text-gray-600 dark:text-gray-300 text-sm">
-                        Timeless pieces for everyday wear
+                        <?= htmlspecialchars($row['description']) ?>
                     </p>
-                    <a href="/collections/essentials" class="mt-3 inline-block text-sm font-medium text-black dark:text-white border-b border-transparent hover:border-black dark:hover:border-white transition-all duration-300">
+                    <a href="/collections/<?= $row['collection_id'] ?>" class="mt-3 inline-block text-sm font-medium text-black dark:text-white border-b border-transparent hover:border-black dark:hover:border-white transition-all duration-300">
                         Discover Now →
                     </a>
                 </div>
             </div>
-
-            <!-- Collection 2 -->
-            <div class="group relative overflow-hidden">
-                <div class="aspect-square bg-gray-100 dark:bg-gray-900 flex items-center justify-center">
-                    <!-- Replace with actual image -->
-                    <span class="text-gray-400 dark:text-gray-600">PREMIUM KNITS</span>
-                </div>
-                <div class="mt-4">
-                    <h3 class="text-lg font-medium text-black dark:text-white">Premium Knitwear</h3>
-                    <p class="mt-1 text-gray-600 dark:text-gray-300 text-sm">
-                        Luxurious fabrics for refined comfort
-                    </p>
-                    <a href="/collections/knitwear" class="mt-3 inline-block text-sm font-medium text-black dark:text-white border-b border-transparent hover:border-black dark:hover:border-white transition-all duration-300">
-                        Discover Now →
-                    </a>
-                </div>
-            </div>
-
-            <!-- Collection 3 -->
-            <div class="group relative overflow-hidden">
-                <div class="aspect-square bg-gray-100 dark:bg-gray-900 flex items-center justify-center">
-                    <!-- Replace with actual image -->
-                    <span class="text-gray-400 dark:text-gray-600">TAILORED LINE</span>
-                </div>
-                <div class="mt-4">
-                    <h3 class="text-lg font-medium text-black dark:text-white">Tailored Classics</h3>
-                    <p class="mt-1 text-gray-600 dark:text-gray-300 text-sm">
-                        Precision-cut silhouettes for modern elegance
-                    </p>
-                    <a href="/collections/tailored" class="mt-3 inline-block text-sm font-medium text-black dark:text-white border-b border-transparent hover:border-black dark:hover:border-white transition-all duration-300">
-                        Discover Now →
-                    </a>
-                </div>
-            </div>
-        </div>
-
-        <!-- View All CTA -->
-        <div class="text-center mt-16">
-            <a href="/collections" class="px-8 py-3 border border-black dark:border-white text-black dark:text-white hover:bg-gray-100 dark:hover:bg-gray-900 transition-colors duration-300 text-sm uppercase tracking-wider">
-                View All Collections
-            </a>
-        </div>
-    </div>
-</section>
-<!-- Featured Collections -->
-<section class="py-20 bg-white dark:bg-black">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <!-- Section Header -->
-        <div class="text-center mb-16">
-            <h2 class="text-3xl sm:text-4xl font-bold text-black dark:text-white mb-4">CURATED COLLECTIONS</h2>
-            <p class="max-w-2xl mx-auto text-gray-600 dark:text-gray-300">
-                Explore our signature lines—where craftsmanship meets contemporary design.
-            </p>
-        </div>
-
-        <!-- Collection Grid -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <!-- Collection 1 -->
-            <div class="group relative overflow-hidden">
-                <div class="aspect-square bg-gray-100 dark:bg-gray-900 flex items-center justify-center">
-                    <!-- Replace with actual image -->
-                    <span class="text-gray-400 dark:text-gray-600">ESSENTIALS COLLECTION</span>
-                </div>
-                <div class="mt-4">
-                    <h3 class="text-lg font-medium text-black dark:text-white">The Essentials</h3>
-                    <p class="mt-1 text-gray-600 dark:text-gray-300 text-sm">
-                        Timeless pieces for everyday wear
-                    </p>
-                    <a href="/collections/essentials" class="mt-3 inline-block text-sm font-medium text-black dark:text-white border-b border-transparent hover:border-black dark:hover:border-white transition-all duration-300">
-                        Discover Now →
-                    </a>
-                </div>
-            </div>
-
-            <!-- Collection 2 -->
-            <div class="group relative overflow-hidden">
-                <div class="aspect-square bg-gray-100 dark:bg-gray-900 flex items-center justify-center">
-                    <!-- Replace with actual image -->
-                    <span class="text-gray-400 dark:text-gray-600">PREMIUM KNITS</span>
-                </div>
-                <div class="mt-4">
-                    <h3 class="text-lg font-medium text-black dark:text-white">Premium Knitwear</h3>
-                    <p class="mt-1 text-gray-600 dark:text-gray-300 text-sm">
-                        Luxurious fabrics for refined comfort
-                    </p>
-                    <a href="/collections/knitwear" class="mt-3 inline-block text-sm font-medium text-black dark:text-white border-b border-transparent hover:border-black dark:hover:border-white transition-all duration-300">
-                        Discover Now →
-                    </a>
-                </div>
-            </div>
-
-            <!-- Collection 3 -->
-            <div class="group relative overflow-hidden">
-                <div class="aspect-square bg-gray-100 dark:bg-gray-900 flex items-center justify-center">
-                    <!-- Replace with actual image -->
-                    <span class="text-gray-400 dark:text-gray-600">TAILORED LINE</span>
-                </div>
-                <div class="mt-4">
-                    <h3 class="text-lg font-medium text-black dark:text-white">Tailored Classics</h3>
-                    <p class="mt-1 text-gray-600 dark:text-gray-300 text-sm">
-                        Precision-cut silhouettes for modern elegance
-                    </p>
-                    <a href="/collections/tailored" class="mt-3 inline-block text-sm font-medium text-black dark:text-white border-b border-transparent hover:border-black dark:hover:border-white transition-all duration-300">
-                        Discover Now →
-                    </a>
-                </div>
-            </div>
-        </div>
+        <?php endwhile; ?>
+    <?php else: ?>
+        <p class="text-center col-span-3 text-gray-500 dark:text-gray-400">No collections available at the moment.</p>
+    <?php endif; ?>
+</div>
 
         <!-- View All CTA -->
         <div class="text-center mt-16">
@@ -256,79 +162,45 @@ $currentTheme = $_SESSION['theme'] ?? 'light';
       <h2 class="text-3xl sm:text-4xl font-bold text-black dark:text-white mb-4">BEST SELLERS</h2>
       <div class="w-20 h-px bg-black dark:bg-white mx-auto"></div>
     </div>
+    <?php
 
-    <!-- Product Grid -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-      <!-- Product 1 -->
-      <div class="group relative">
-        <div class="aspect-square bg-gray-100 dark:bg-gray-800 overflow-hidden">
-          <!-- Product Image Placeholder -->
-          <div class="w-full h-full flex items-center justify-center bg-gray-200 dark:bg-gray-700 transition-transform duration-500 group-hover:scale-105">
-            <span class="text-gray-400 dark:text-gray-500">Product Image</span>
-          </div>
-        </div>
-        <div class="mt-4">
-          <h3 class="text-lg font-medium text-black dark:text-white">The Drake Tee</h3>
-          <p class="text-gray-500 dark:text-gray-400 text-sm mt-1">Essential Collection</p>
-          <p class="text-black dark:text-white font-medium mt-2">$78.00</p>
-        </div>
-        <!-- Quick add to cart (appears on hover) -->
-        <button class="absolute bottom-20 right-4 bg-black dark:bg-white text-white dark:text-black px-3 py-2 text-xs uppercase tracking-wider opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-          Quick Add
-        </button>
-      </div>
+// Fetch products from DB
+$sql = "SELECT * FROM products ORDER BY created_at DESC"; 
+$result = $conn->query($sql);
+?>
 
-      <!-- Product 2 -->
-      <div class="group relative">
-        <div class="aspect-square bg-gray-100 dark:bg-gray-800 overflow-hidden">
-          <div class="w-full h-full flex items-center justify-center bg-gray-200 dark:bg-gray-700 transition-transform duration-500 group-hover:scale-105">
-            <span class="text-gray-400 dark:text-gray-500">Product Image</span>
-          </div>
-        </div>
-        <div class="mt-4">
-          <h3 class="text-lg font-medium text-black dark:text-white">Tailored Wool Blazer</h3>
-          <p class="text-gray-500 dark:text-gray-400 text-sm mt-1">Formal Collection</p>
-          <p class="text-black dark:text-white font-medium mt-2">$298.00</p>
-        </div>
-        <button class="absolute bottom-20 right-4 bg-black dark:bg-white text-white dark:text-black px-3 py-2 text-xs uppercase tracking-wider opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-          Quick Add
-        </button>
-      </div>
-
-      <!-- Product 3 -->
-      <div class="group relative">
-        <div class="aspect-square bg-gray-100 dark:bg-gray-800 overflow-hidden">
-          <div class="w-full h-full flex items-center justify-center bg-gray-200 dark:bg-gray-700 transition-transform duration-500 group-hover:scale-105">
-            <span class="text-gray-400 dark:text-gray-500">Product Image</span>
-          </div>
-        </div>
-        <div class="mt-4">
-          <h3 class="text-lg font-medium text-black dark:text-white">Classic Chino Pants</h3>
-          <p class="text-gray-500 dark:text-gray-400 text-sm mt-1">Everyday Essentials</p>
-          <p class="text-black dark:text-white font-medium mt-2">$128.00</p>
-        </div>
-        <button class="absolute bottom-20 right-4 bg-black dark:bg-white text-white dark:text-black px-3 py-2 text-xs uppercase tracking-wider opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-          Quick Add
-        </button>
-      </div>
-
-      <!-- Product 4 -->
-      <div class="group relative">
-        <div class="aspect-square bg-gray-100 dark:bg-gray-800 overflow-hidden">
-          <div class="w-full h-full flex items-center justify-center bg-gray-200 dark:bg-gray-700 transition-transform duration-500 group-hover:scale-105">
-            <span class="text-gray-400 dark:text-gray-500">Product Image</span>
-          </div>
-        </div>
-        <div class="mt-4">
-          <h3 class="text-lg font-medium text-black dark:text-white">Cashmere Crewneck</h3>
-          <p class="text-gray-500 dark:text-gray-400 text-sm mt-1">Luxury Knits</p>
-          <p class="text-black dark:text-white font-medium mt-2">$245.00</p>
-        </div>
-        <button class="absolute bottom-20 right-4 bg-black dark:bg-white text-white dark:text-black px-3 py-2 text-xs uppercase tracking-wider opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-          Quick Add
-        </button>
-      </div>
-    </div>
+<!-- Product Grid -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+    <?php if ($result && $result->num_rows > 0): ?>
+        <?php while ($row = $result->fetch_assoc()): ?>
+            <div class="group relative">
+                <div class="aspect-square bg-gray-100 dark:bg-gray-800 overflow-hidden">
+                    <?php if (!empty($row['image_url'])): ?>
+                        <img src="<?= $row['image_url'] ?>" alt="<?= htmlspecialchars($row['product_name']) ?>" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+                    <?php else: ?>
+                        <div class="w-full h-full flex items-center justify-center bg-gray-200 dark:bg-gray-700 transition-transform duration-500 group-hover:scale-105">
+                            <span class="text-gray-400 dark:text-gray-500">Product Image</span>
+                        </div>
+                    <?php endif; ?>
+                </div>
+                <div class="mt-4">
+                    <h3 class="text-lg font-medium text-black dark:text-white"><?= htmlspecialchars($row['product_name']) ?></h3>
+                    <p class="text-gray-500 dark:text-gray-400 text-sm mt-1"><?= htmlspecialchars($row['category']) ?></p>
+                    <p class="text-black dark:text-white font-medium mt-2">$<?= number_format($row['price'], 2) ?></p>
+                </div>
+                <!-- Quick add to cart (appears on hover) -->
+                <form method="POST" action="add_to_cart.php">
+                    <input type="hidden" name="product_id" value="<?= $row['id'] ?>">
+                    <button type="submit" class="absolute bottom-20 right-4 bg-black dark:bg-white text-white dark:text-black px-3 py-2 text-xs uppercase tracking-wider opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        Quick Add
+                    </button>
+                </form>
+            </div>
+        <?php endwhile; ?>
+    <?php else: ?>
+        <p class="col-span-4 text-center text-gray-500 dark:text-gray-400">No products available.</p>
+    <?php endif; ?>
+</div>
 
     <!-- View All Button -->
     <div class="text-center mt-16">
@@ -350,78 +222,47 @@ $currentTheme = $_SESSION['theme'] ?? 'light';
       </p>
     </div>
 
-    <!-- Editorial Grid -->
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-      <!-- Feature Story -->
-      <div class="group relative aspect-[4/5] bg-gray-100 dark:bg-gray-900 overflow-hidden">
-        <!-- Image Placeholder -->
-        <div class="absolute inset-0 bg-gray-300 dark:bg-gray-800 flex items-center justify-center">
-          <span class="text-gray-500 dark:text-gray-400">Editorial Image</span>
-        </div>
-        <!-- Content Overlay -->
-        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent flex items-end p-8">
-          <div>
-            <span class="text-sm text-white/80 mb-2 block">Feature Story</span>
-            <h3 class="text-2xl font-bold text-white mb-3">The Architecture of Movement</h3>
-            <p class="text-white/80 mb-4 max-w-md">Exploring how fabric and form interact in our SS24 collection</p>
-            <a href="/journal/architecture-of-movement" class="text-white border-b border-white/50 pb-1 text-sm uppercase tracking-wider hover:border-white transition-colors">
-              Read Story
-            </a>
-          </div>
-        </div>
-      </div>
+<?php
+// Fetch all editorials
+$sql = "SELECT * FROM editorials ORDER BY id ASC";
+$result = $conn->query($sql);
 
-      <!-- Secondary Stories -->
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
-        <!-- Story 1 -->
-        <div class="group relative aspect-square bg-gray-100 dark:bg-gray-900 overflow-hidden">
-          <div class="absolute inset-0 bg-gray-200 dark:bg-gray-700 flex items-center justify-center">
-            <span class="text-gray-500 dark:text-gray-400">Editorial Image</span>
-          </div>
-          <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent flex items-end p-6">
-            <div>
-              <h3 class="text-lg font-bold text-white mb-2">Material Origins</h3>
-              <a href="/journal/material-origins" class="text-white/80 border-b border-white/30 pb-1 text-xs uppercase tracking-wider hover:border-white transition-colors">
-                Explore
-              </a>
-            </div>
-          </div>
-        </div>
+// Separate feature and secondary stories
+$featureStory = null;
+$secondaryStories = [];
 
-        <!-- Story 2 -->
-        <div class="group relative aspect-square bg-gray-100 dark:bg-gray-900 overflow-hidden">
-          <div class="absolute inset-0 bg-gray-200 dark:bg-gray-700 flex items-center justify-center">
-            <span class="text-gray-500 dark:text-gray-400">Editorial Image</span>
-          </div>
-          <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent flex items-end p-6">
-            <div>
-              <h3 class="text-lg font-bold text-white mb-2">24 Hours in Drake</h3>
-              <a href="/journal/24-hours" class="text-white/80 border-b border-white/30 pb-1 text-xs uppercase tracking-wider hover:border-white transition-colors">
-                View Series
-              </a>
-            </div>
-          </div>
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        if ($row['type'] === 'feature' && $featureStory === null) {
+            $featureStory = $row;
+        } else {
+            $secondaryStories[] = $row;
+        }
+    }
+}
+?>
+<!-- Secondary Stories -->
+<div class="grid grid-cols-1 gap-8 sm:grid-cols-2">
+    <?php foreach ($secondaryStories as $story): ?>
+    <div class="group relative aspect-square bg-gray-100 dark:bg-gray-900 overflow-hidden">
+        <div class="absolute inset-0 bg-gray-200 dark:bg-gray-700 flex items-center justify-center">
+            <img src="<?php echo $story['image_url']; ?>" alt="<?php echo $story['title']; ?>" class="w-full h-full object-cover">
         </div>
-
-        <!-- Story 3 -->
-        <div class="group relative aspect-square bg-gray-100 dark:bg-gray-900 overflow-hidden col-span-1 sm:col-span-2">
-          <div class="absolute inset-0 bg-gray-200 dark:bg-gray-700 flex items-center justify-center">
-            <span class="text-gray-500 dark:text-gray-400">Editorial Image</span>
-          </div>
-          <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent flex items-end p-6">
+        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent flex items-end p-4 sm:p-6">
             <div>
-              <span class="text-sm text-white/80 mb-2 block">New Series</span>
-              <h3 class="text-xl font-bold text-white mb-3">Designer Dialogues</h3>
-              <a href="/journal/designer-dialogues" class="text-white border-b border-white/50 pb-1 text-sm uppercase tracking-wider hover:border-white transition-colors">
-                Watch Now
-              </a>
+                <?php if (!empty($story['subtitle'])): ?>
+                    <span class="text-xs text-white/80 mb-1 block"><?php echo $story['subtitle']; ?></span>
+                <?php endif; ?>
+                <h3 class="text-lg font-bold text-white mb-1 sm:mb-2"><?php echo $story['title']; ?></h3>
+                <a href="<?php echo $story['link']; ?>" class="text-white/80 border-b border-white/30 pb-1 text-xs uppercase tracking-wider hover:border-white transition-colors">
+                    <?php echo ($story['type'] == 'series') ? 'Watch Now' : 'Explore'; ?>
+                </a>
             </div>
-          </div>
         </div>
-      </div>
     </div>
-
-    <!-- View All Button -->
+    <?php endforeach; ?>
+</div>
+    <!-- View All Button ..-->
     <div class="text-center mt-16">
       <a href="/journal" class="inline-block border-b border-black dark:border-white text-black dark:text-white pb-1 font-medium uppercase tracking-wider text-sm hover:opacity-80 transition-opacity">
         Visit The Journal →
@@ -615,7 +456,7 @@ document.getElementById('subscribeForm').addEventListener('submit', function(e) 
         animation: float-3 12s ease-in-out infinite;
     }
 </style>
-
+<?php include './includes/footer.php';?>
 
 </body>
 </html>
