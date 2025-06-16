@@ -46,9 +46,10 @@ error_reporting(1);
     </script>
 </head>
 
-<body class="bg-gray-100 dark:bg-gray-900 min-h-screen flex flex-col">
-
-    <!-- Product Display -->
+<body class="bg-drake-light dark:bg-drake-dark">
+<?php include './includes/nav.php';?>
+<div style="height:60px;"></div>
+   <!-- Product Display -->
     <div class="container mx-auto p-4 grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
 
         <!-- Product Image -->
