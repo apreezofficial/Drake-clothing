@@ -1,5 +1,4 @@
 <?php
-// Start session if not already started
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
@@ -165,7 +164,7 @@ $result = $conn->query($sql_c);
     <?php
 
 // Fetch products from DB
-$sql = "SELECT * FROM products ORDER BY created_at DESC"; 
+$sql = "SELECT * FROM products ORDER BY created_at DESC LIMIT 2"; 
 $result = $conn->query($sql);
 ?>
 
