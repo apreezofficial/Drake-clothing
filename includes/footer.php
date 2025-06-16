@@ -14,9 +14,9 @@
             <div>
                 <h3 class="text-lg font-semibold text-black dark:text-white mb-4">Shop</h3>
                 <ul class="space-y-2 text-gray-600 dark:text-gray-400 text-sm">
-                    <li><a href="/shop" class="hover:underline">All Products</a></li>
-                    <li><a href="/collections" class="hover:underline">Collections</a></li>
-                    <li><a href="/about" class="hover:underline">About Us</a></li>
+                    <li><a href="shop.php" class="hover:underline">All Products</a></li>
+                    <li><a href="collections.php" class="hover:underline">Collections</a></li>
+                    <li><a href="about.php" class="hover:underline">About Us</a></li>
                 </ul>
             </div>
 
@@ -24,9 +24,9 @@
             <div>
                 <h3 class="text-lg font-semibold text-black dark:text-white mb-4">Customer Service</h3>
                 <ul class="space-y-2 text-gray-600 dark:text-gray-400 text-sm">
-                    <li><a href="/contact" class="hover:underline">Contact Us</a></li>
-                    <li><a href="/faq" class="hover:underline">FAQ</a></li>
-                    <li><a href="/shipping" class="hover:underline">Shipping & Returns</a></li>
+                    <li><a href="/#contact" class="hover:underline">Contact Us</a></li>
+                    <li><a href="/#faq" class="hover:underline">FAQ</a></li>
+                    <li><a href="#" class="hover:underline">Shipping & Returns</a></li>
                 </ul>
             </div>
 
@@ -41,7 +41,7 @@
                         <i class="fab fa-twitter"></i>
                     </a>
                     <a href="#" class="text-black dark:text-white hover:text-gray-500 dark:hover:text-gray-400 text-xl">
-                        <i class="fab fa-instagram"></i>
+                         <i class="fab fa-instagram"></i>
                     </a>
                     <a href="#" class="text-black dark:text-white hover:text-gray-500 dark:hover:text-gray-400 text-xl">
                         <i class="fab fa-linkedin-in"></i>
@@ -49,13 +49,12 @@
                 </div>
             </div>
         </div>
-
         <!-- Footer Bottom -->
         <div class="mt-12 border-t border-gray-200 dark:border-gray-800 pt-6 flex flex-col sm:flex-row justify-between items-center text-gray-600 dark:text-gray-400 text-sm">
             <p>&copy; <?php echo date("Y") ; ?> DRAKE. All rights reserved.</p>
             <div class="flex space-x-4 mt-4 sm:mt-0">
-                <a href="/privacy" class="hover:underline">Privacy Policy</a>
-                <a href="/terms" class="hover:underline">Terms of Service</a>
+                <a href="#" class="hover:underline">Privacy Policy</a>
+                <a href="#" class="hover:underline">Terms of Service</a>
             </div>
         </div>
     </div>

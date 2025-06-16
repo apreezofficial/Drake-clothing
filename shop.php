@@ -52,7 +52,7 @@ $result = $conn->query($sql);
                 <!-- Product Image -->
                 <div class="aspect-square bg-gray-100 dark:bg-gray-800 overflow-hidden relative">
                     <?php if (!empty($row['image_url'])): ?>
-                        <img src="<?= $row['image_url'] ?>" alt="<?= htmlspecialchars($row['product_name']) ?>" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                        <img src="<?= $row['image_url'] ?>" alt="<?= htmlspecialchars($row['name']) ?>" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
                     <?php else: ?>
                         <div class="w-full h-full flex items-center justify-center bg-gray-200 dark:bg-gray-700 transition-transform duration-700 group-hover:scale-110">
                             <span class="text-gray-400 dark:text-gray-500">Product Image</span>
@@ -70,7 +70,7 @@ $result = $conn->query($sql);
                 <!-- Product Details -->
                 <div class="mt-4 px-4 pb-4 text-center">
                     <h3 class="text-lg font-bold text-black dark:text-white truncate">
-                        <?= htmlspecialchars($row['product_name']) ?>
+                        <?= htmlspecialchars($row['name']) ?>
                     </h3>
                     <p class="text-gray-500 dark:text-gray-400 text-sm mt-1">
                         <?= htmlspecialchars($row['category']) ?>

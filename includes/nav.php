@@ -38,16 +38,38 @@ $currentTheme = 'theme'?? 'light';
 
                 <!-- Account -->
                 <a href="/track.php" class="p-2 text-black dark:text-white hover:bg-gray-100 dark:hover:bg-gray-900 rounded-md">
-                    <i class="fas fa-user"></i>
+                    <i class="fas fa-search"></i>
                 </a>
 
                 <!-- Cart -->
-                <div class="relative">
-                    <a href="/cart.php" class="p-2 text-black dark:text-white hover:bg-gray-100 dark:hover:bg-gray-900 rounded-md">
-                        <i class="fas fa-shopping-bag"></i>
-                        <span class="cart-count absolute -top-1 -right-1 bg-black dark:bg-white text-white dark:text-black text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">0</span>
-                    </a>
-                </div>
+<div class="relative">
+    <a href="/cart.php" class="p-2 text-black dark:text-white hover:bg-gray-100 dark:hover:bg-gray-900 rounded-md">
+        <i class="fas fa-shopping-bag"></i>
+        <span id="cart-count" class="cart-count absolute -top-1 -right-1 bg-black dark:bg-white text-white dark:text-black text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">0</span>
+    </a>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const cartCountElement = document.getElementById('cart-count');
+
+        function updateCartCount() {
+            const cart = JSON.parse(localStorage.getItem('cart')) || {};
+            const batchCount = Object.keys(cart).length;
+
+            cartCountElement.textContent = batchCount;
+        }
+
+        // Initial load
+        updateCartCount();
+
+        // Auto update every second
+        setInterval(updateCartCount, 100);
+
+        // Still listen for changes from other tabs (optional)
+        window.addEventListener('storage', updateCartCount);
+    });
+</script>
             </div>
         </div>
     </div>

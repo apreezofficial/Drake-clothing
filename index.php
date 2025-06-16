@@ -1,7 +1,4 @@
 <?php
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
 include 'conn.php';
 ?>
 
@@ -10,7 +7,7 @@ include 'conn.php';
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Drake Clothing Store</title>
+    <title>Drake Clothing Store | Home</title>
     <script src="/tailwind.js"></script>
     <link rel="stylesheet" href="includes/font-awesome/css/all.css">
     <script>
@@ -28,6 +25,7 @@ include 'conn.php';
             }
         }
     </script>
+    
 </head>
 <body class="bg-drake-light dark:bg-drake-dark">
 <?php include './includes/nav.php';?>
@@ -74,10 +72,10 @@ include 'conn.php';
 
     <!-- CTA Buttons -->
     <div class="flex flex-col sm:flex-row justify-center gap-4 mb-12">
-        <a href="/new-arrivals" class="px-8 py-3 bg-black dark:bg-white text-white dark:text-black hover:bg-gray-800 dark:hover:bg-gray-200 transition-colors duration-300 text-sm uppercase tracking-wider font-medium">
+        <a href="shop.php" class="px-8 py-3 bg-black dark:bg-white text-white dark:text-black hover:bg-gray-800 dark:hover:bg-gray-200 transition-colors duration-300 text-sm uppercase tracking-wider font-medium">
             Shop New Drops
         </a>
-        <a href="/collections" class="px-8 py-3 border border-black dark:border-white text-black dark:text-white hover:bg-gray-100 dark:hover:bg-gray-900 transition-colors duration-300 text-sm uppercase tracking-wider font-medium">
+        <a href="collections.php" class="px-8 py-3 border border-black dark:border-white text-black dark:text-white hover:bg-gray-100 dark:hover:bg-gray-900 transition-colors duration-300 text-sm uppercase tracking-wider font-medium">
             Browse Collections
         </a>
     </div>
@@ -167,40 +165,47 @@ $result = $conn->query($sql_c);
 $sql = "SELECT * FROM products ORDER BY created_at DESC LIMIT 3"; 
 $result = $conn->query($sql);
 ?>
-
 <!-- Product Grid -->
-<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 p-4">
     <?php if ($result && $result->num_rows > 0): ?>
         <?php while ($row = $result->fetch_assoc()): ?>
-            <div class="group relative">
-                <div class="aspect-square bg-gray-100 dark:bg-gray-800 overflow-hidden">
+            <div class="product-card group relative bg-white dark:bg-gray-900 rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transform hover:scale-[1.02] transition duration-500">
+                <!-- Product Image -->
+                <div class="aspect-square bg-gray-100 dark:bg-gray-800 overflow-hidden relative">
                     <?php if (!empty($row['image_url'])): ?>
-                        <img src="<?= $row['image_url'] ?>" alt="<?= htmlspecialchars($row['product_name']) ?>" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+                        <img src="<?= $row['image_url'] ?>" alt="<?= htmlspecialchars($row['product_name']) ?>" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
                     <?php else: ?>
-                        <div class="w-full h-full flex items-center justify-center bg-gray-200 dark:bg-gray-700 transition-transform duration-500 group-hover:scale-105">
+                        <div class="w-full h-full flex items-center justify-center bg-gray-200 dark:bg-gray-700 transition-transform duration-700 group-hover:scale-110">
                             <span class="text-gray-400 dark:text-gray-500">Product Image</span>
                         </div>
                     <?php endif; ?>
+                    
+                    <!-- Glass Overlay -->
+                    <div class="absolute inset-0 bg-black/30 dark:bg-black/40 opacity-0 group-hover:opacity-100 backdrop-blur-sm transition duration-500 flex items-center justify-center">
+                        <a href="product.php?id=<?= $row['id'] ?>" class="bg-white dark:bg-black text-black dark:text-white px-5 py-2 rounded-full text-sm font-semibold transform translate-y-10 group-hover:translate-y-0 transition duration-500 ease-in-out hover:bg-gray-200 dark:hover:bg-gray-800">
+                            View Product
+                        </a>
+                    </div>
                 </div>
-                <div class="mt-4">
-                    <h3 class="text-lg font-medium text-black dark:text-white"><?= htmlspecialchars($row['product_name']) ?></h3>
-                    <p class="text-gray-500 dark:text-gray-400 text-sm mt-1"><?= htmlspecialchars($row['category']) ?></p>
-                    <p class="text-black dark:text-white font-medium mt-2">$<?= number_format($row['price'], 2) ?></p>
+
+                <!-- Product Details -->
+                <div class="mt-4 px-4 pb-4 text-center">
+                    <h3 class="text-lg font-bold text-black dark:text-white truncate">
+                        <?= htmlspecialchars($row['product_name']) ?>
+                    </h3>
+                    <p class="text-gray-500 dark:text-gray-400 text-sm mt-1">
+                        <?= htmlspecialchars($row['category']) ?>
+                    </p>
+                    <p class="text-black dark:text-white font-semibold mt-2 text-lg">
+                        $<?= number_format($row['price'], 2) ?>
+                    </p>
                 </div>
-                <!-- Quick add to cart (appears on hover) -->
-                <form method="POST" action="add_to_cart.php">
-                    <input type="hidden" name="product_id" value="<?= $row['id'] ?>">
-                    <button type="submit" class="absolute bottom-20 right-4 bg-black dark:bg-white text-white dark:text-black px-3 py-2 text-xs uppercase tracking-wider opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                        Quick Add
-                    </button>
-                </form>
             </div>
         <?php endwhile; ?>
     <?php else: ?>
         <p class="col-span-4 text-center text-gray-500 dark:text-gray-400">No products available.</p>
     <?php endif; ?>
 </div>
-
     <!-- View All Button -->
     <div class="text-center mt-16">
       <a href="shop.php" class="inline-block border-b border-black dark:border-white text-black dark:text-white pb-1 font-medium uppercase tracking-wider text-sm hover:opacity-80 transition-opacity">
