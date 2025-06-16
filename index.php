@@ -526,23 +526,63 @@ $currentTheme = $_SESSION['theme'] ?? 'light';
       Subscribe for exclusive early access to new collections, private events, and 10% off your first order.
     </p>
 
-    <!-- Signup Form -->
-    <form class="max-w-md mx-auto">
-      <div class="flex flex-col sm:flex-row gap-4">
-        <input 
-          type="email" 
-          placeholder="Your email address" 
-          class="flex-1 px-4 py-3 border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-black dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-1 focus:ring-black dark:focus:ring-white"
-          required
-        >
-        <button 
-          type="submit" 
-          class="px-6 py-3 bg-black dark:bg-white text-white dark:text-black hover:bg-gray-800 dark:hover:bg-gray-200 transition-colors duration-300 uppercase tracking-wider text-sm font-medium"
-        >
-          Subscribe
-        </button>
-      </div>
-    </form>
+<!-- Signup Form -->
+<form id="subscribeForm" class="max-w-md mx-auto">
+  <div class="flex flex-col sm:flex-row gap-4">
+    <input 
+      type="email" 
+      id="emailInput"
+      placeholder="Your email address" 
+      class="flex-1 px-4 py-3 border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-black dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-1 focus:ring-black dark:focus:ring-white"
+    >
+    <button 
+      type="submit" 
+      class="px-6 py-3 bg-black dark:bg-white text-white dark:text-black hover:bg-gray-800 dark:hover:bg-gray-200 transition-colors duration-300 uppercase tracking-wider text-sm font-medium"
+    >
+      Subscribe
+    </button>
+  </div>
+</form>
+<script>
+document.getElementById('subscribeForm').addEventListener('submit', function(e) {
+    e.preventDefault(); // Prevent default form submission
+
+    const emailInput = document.getElementById('emailInput');
+    const email = emailInput.value.trim();
+    const messageDiv = document.getElementById('subscribeMessage');
+
+    // Clear previous messages
+    messageDiv.textContent = '';
+    messageDiv.className = 'mt-4 text-center text-sm font-medium';
+
+    // Prepare AJAX request
+    fetch('ajax/subscribe.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: `email=${encodeURIComponent(email)}`
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.status === 'success') {
+            messageDiv.textContent = data.message;
+            messageDiv.classList.add('text-green-600');
+            emailInput.value = ''; // Clear input on success
+        } else {
+            messageDiv.textContent = data.message;
+            messageDiv.classList.add('text-red-600');
+        }
+    })
+    .catch(error => {
+        messageDiv.textContent = 'Something went wrong. Please try again.';
+        messageDiv.classList.add('text-red-600');
+        console.error('Error:', error);
+    });
+});
+</script>
+<!-- Feedback Message -->
+<div id="subscribeMessage" class="mt-4 text-center text-sm font-medium"></div>
 
     <!-- Privacy Note -->
     <p class="text-xs text-gray-400 dark:text-gray-500 mt-6">
