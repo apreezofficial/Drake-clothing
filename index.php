@@ -38,7 +38,7 @@ $currentTheme = $_SESSION['theme'] ?? 'light';
 <!-- Hero Section -->
 <section class="relative bg-white dark:bg-black min-h-[80vh] flex items-center overflow-hidden">
     <!-- Square grid background -->
-    <div class="absolute inset-0 grid grid-cols-8 grid-rows-6 gap-px overflow-hidden opacity-10 dark:opacity-[0.8]">
+    <div class="absolute inset-0 grid grid-cols-8 grid-rows-6 gap-px overflow-hidden opacity-10 dark:opacity-[0.08]">
         <!-- Generate grid cells -->
         <?php for ($i = 0; $i < 48; $i++): ?>
             <div class="bg-black dark:bg-white"></div>
@@ -247,6 +247,98 @@ $currentTheme = $_SESSION['theme'] ?? 'light';
         </div>
     </div>
 </section>
+<!-- Best Sellers Section -->
+<section class="py-20 bg-gray-50 dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- Section Header -->
+    <div class="text-center mb-16">
+      <span class="text-xs uppercase tracking-widest text-gray-500 dark:text-gray-400 mb-2 block">Most Coveted</span>
+      <h2 class="text-3xl sm:text-4xl font-bold text-black dark:text-white mb-4">BEST SELLERS</h2>
+      <div class="w-20 h-px bg-black dark:bg-white mx-auto"></div>
+    </div>
+
+    <!-- Product Grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+      <!-- Product 1 -->
+      <div class="group relative">
+        <div class="aspect-square bg-gray-100 dark:bg-gray-800 overflow-hidden">
+          <!-- Product Image Placeholder -->
+          <div class="w-full h-full flex items-center justify-center bg-gray-200 dark:bg-gray-700 transition-transform duration-500 group-hover:scale-105">
+            <span class="text-gray-400 dark:text-gray-500">Product Image</span>
+          </div>
+        </div>
+        <div class="mt-4">
+          <h3 class="text-lg font-medium text-black dark:text-white">The Drake Tee</h3>
+          <p class="text-gray-500 dark:text-gray-400 text-sm mt-1">Essential Collection</p>
+          <p class="text-black dark:text-white font-medium mt-2">$78.00</p>
+        </div>
+        <!-- Quick add to cart (appears on hover) -->
+        <button class="absolute bottom-20 right-4 bg-black dark:bg-white text-white dark:text-black px-3 py-2 text-xs uppercase tracking-wider opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+          Quick Add
+        </button>
+      </div>
+
+      <!-- Product 2 -->
+      <div class="group relative">
+        <div class="aspect-square bg-gray-100 dark:bg-gray-800 overflow-hidden">
+          <div class="w-full h-full flex items-center justify-center bg-gray-200 dark:bg-gray-700 transition-transform duration-500 group-hover:scale-105">
+            <span class="text-gray-400 dark:text-gray-500">Product Image</span>
+          </div>
+        </div>
+        <div class="mt-4">
+          <h3 class="text-lg font-medium text-black dark:text-white">Tailored Wool Blazer</h3>
+          <p class="text-gray-500 dark:text-gray-400 text-sm mt-1">Formal Collection</p>
+          <p class="text-black dark:text-white font-medium mt-2">$298.00</p>
+        </div>
+        <button class="absolute bottom-20 right-4 bg-black dark:bg-white text-white dark:text-black px-3 py-2 text-xs uppercase tracking-wider opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+          Quick Add
+        </button>
+      </div>
+
+      <!-- Product 3 -->
+      <div class="group relative">
+        <div class="aspect-square bg-gray-100 dark:bg-gray-800 overflow-hidden">
+          <div class="w-full h-full flex items-center justify-center bg-gray-200 dark:bg-gray-700 transition-transform duration-500 group-hover:scale-105">
+            <span class="text-gray-400 dark:text-gray-500">Product Image</span>
+          </div>
+        </div>
+        <div class="mt-4">
+          <h3 class="text-lg font-medium text-black dark:text-white">Classic Chino Pants</h3>
+          <p class="text-gray-500 dark:text-gray-400 text-sm mt-1">Everyday Essentials</p>
+          <p class="text-black dark:text-white font-medium mt-2">$128.00</p>
+        </div>
+        <button class="absolute bottom-20 right-4 bg-black dark:bg-white text-white dark:text-black px-3 py-2 text-xs uppercase tracking-wider opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+          Quick Add
+        </button>
+      </div>
+
+      <!-- Product 4 -->
+      <div class="group relative">
+        <div class="aspect-square bg-gray-100 dark:bg-gray-800 overflow-hidden">
+          <div class="w-full h-full flex items-center justify-center bg-gray-200 dark:bg-gray-700 transition-transform duration-500 group-hover:scale-105">
+            <span class="text-gray-400 dark:text-gray-500">Product Image</span>
+          </div>
+        </div>
+        <div class="mt-4">
+          <h3 class="text-lg font-medium text-black dark:text-white">Cashmere Crewneck</h3>
+          <p class="text-gray-500 dark:text-gray-400 text-sm mt-1">Luxury Knits</p>
+          <p class="text-black dark:text-white font-medium mt-2">$245.00</p>
+        </div>
+        <button class="absolute bottom-20 right-4 bg-black dark:bg-white text-white dark:text-black px-3 py-2 text-xs uppercase tracking-wider opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+          Quick Add
+        </button>
+      </div>
+    </div>
+
+    <!-- View All Button -->
+    <div class="text-center mt-16">
+      <a href="/shop" class="inline-block border-b border-black dark:border-white text-black dark:text-white pb-1 font-medium uppercase tracking-wider text-sm hover:opacity-80 transition-opacity">
+        View All Products →
+      </a>
+    </div>
+  </div>
+</section>
+
 <style>
     /* Grid animation */
     @keyframes float-1 {
