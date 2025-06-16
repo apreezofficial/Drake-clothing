@@ -164,7 +164,7 @@ $result = $conn->query($sql_c);
     <?php
 
 // Fetch products from DB
-$sql = "SELECT * FROM products ORDER BY created_at DESC LIMIT 2"; 
+$sql = "SELECT * FROM products ORDER BY created_at DESC LIMIT 3"; 
 $result = $conn->query($sql);
 ?>
 
@@ -203,7 +203,7 @@ $result = $conn->query($sql);
 
     <!-- View All Button -->
     <div class="text-center mt-16">
-      <a href="/shop" class="inline-block border-b border-black dark:border-white text-black dark:text-white pb-1 font-medium uppercase tracking-wider text-sm hover:opacity-80 transition-opacity">
+      <a href="shop.php" class="inline-block border-b border-black dark:border-white text-black dark:text-white pb-1 font-medium uppercase tracking-wider text-sm hover:opacity-80 transition-opacity">
         View All Products →
       </a>
     </div>
