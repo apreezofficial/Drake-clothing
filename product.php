@@ -167,7 +167,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 </script>
-
+<?php include './includes/footer.php';?>
 </body>
 
 </html>
