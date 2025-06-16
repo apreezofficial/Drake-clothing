@@ -45,42 +45,46 @@ $result = $conn->query($sql);
 ?>
 
 <!-- Product Grid -->
-<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 p-4">
     <?php if ($result && $result->num_rows > 0): ?>
         <?php while ($row = $result->fetch_assoc()): ?>
-            <div class="product-card group relative">
-                <div class="aspect-square bg-gray-100 dark:bg-gray-800 overflow-hidden">
+            <div class="product-card group relative bg-white dark:bg-gray-900 rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transform hover:scale-[1.02] transition duration-500">
+                <!-- Product Image -->
+                <div class="aspect-square bg-gray-100 dark:bg-gray-800 overflow-hidden relative">
                     <?php if (!empty($row['image_url'])): ?>
-                        <img src="<?= $row['image_url'] ?>" alt="<?= htmlspecialchars($row['product_name']) ?>" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+                        <img src="<?= $row['image_url'] ?>" alt="<?= htmlspecialchars($row['product_name']) ?>" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
                     <?php else: ?>
-                        <div class="w-full h-full flex items-center justify-center bg-gray-200 dark:bg-gray-700 transition-transform duration-500 group-hover:scale-105">
+                        <div class="w-full h-full flex items-center justify-center bg-gray-200 dark:bg-gray-700 transition-transform duration-700 group-hover:scale-110">
                             <span class="text-gray-400 dark:text-gray-500">Product Image</span>
                         </div>
                     <?php endif; ?>
+                    
+                    <!-- Glass Overlay -->
+                    <div class="absolute inset-0 bg-black/30 dark:bg-black/40 opacity-0 group-hover:opacity-100 backdrop-blur-sm transition duration-500 flex items-center justify-center">
+                        <a href="product.php?id=<?= $row['id'] ?>" class="bg-white dark:bg-black text-black dark:text-white px-5 py-2 rounded-full text-sm font-semibold transform translate-y-10 group-hover:translate-y-0 transition duration-500 ease-in-out hover:bg-gray-200 dark:hover:bg-gray-800">
+                            View Product
+                        </a>
+                    </div>
                 </div>
-<div class="mt-4">
-    <h3 class="text-lg font-medium text-black dark:text-white">
-        <?= htmlspecialchars($row['product_name']) ?>
-    </h3>
-    <p class="text-gray-500 dark:text-gray-400 text-sm mt-1">
-        <?= htmlspecialchars($row['category']) ?>
-    </p>
-    <p class="text-black dark:text-white font-medium mt-2">
-        $<?= number_format($row['price'], 2) ?>
-    </p>
 
-    <!-- View Button -->
-    <a href="product.php?id=<?= $row['id'] ?>" class="inline-block mt-3 bg-black dark:bg-white text-white dark:text-black px-4 py-2 rounded-full text-sm font-medium hover:bg-gray-800 dark:hover:bg-gray-300 transition duration-300">
-        View
-    </a>
-</div>
+                <!-- Product Details -->
+                <div class="mt-4 px-4 pb-4 text-center">
+                    <h3 class="text-lg font-bold text-black dark:text-white truncate">
+                        <?= htmlspecialchars($row['product_name']) ?>
+                    </h3>
+                    <p class="text-gray-500 dark:text-gray-400 text-sm mt-1">
+                        <?= htmlspecialchars($row['category']) ?>
+                    </p>
+                    <p class="text-black dark:text-white font-semibold mt-2 text-lg">
+                        $<?= number_format($row['price'], 2) ?>
+                    </p>
+                </div>
             </div>
         <?php endwhile; ?>
     <?php else: ?>
         <p class="col-span-4 text-center text-gray-500 dark:text-gray-400">No products available.</p>
     <?php endif; ?>
 </div>
-  </div>
 </section>
 <?php include './includes/footer.php';?>
 </body>
