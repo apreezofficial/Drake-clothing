@@ -161,8 +161,6 @@ document.addEventListener('DOMContentLoaded', () => {
             const selectedValue = select.value;
 
             userOptions[tagType] = selectedValue;
-
-            console.log(`User-message: ${formatUserMessage(userOptions)}`);
         });
     });
 
