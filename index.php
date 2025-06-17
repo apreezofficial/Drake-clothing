@@ -122,7 +122,7 @@ $result = $conn->query($sql_c);
                     <p class="mt-1 text-gray-600 dark:text-gray-300 text-sm">
                         <?= htmlspecialchars($row['description']) ?>
                     </p>
-                    <a href="/collections/<?= $row['collection_id'] ?>" class="mt-3 inline-block text-sm font-medium text-black dark:text-white border-b border-transparent hover:border-black dark:hover:border-white transition-all duration-300">
+                    <a href="collections.php<?= $row['collection_id'] ?>" class="mt-3 inline-block text-sm font-medium text-black dark:text-white border-b border-transparent hover:border-black dark:hover:border-white transition-all duration-300">
                         Discover Now →
                     </a>
                 </div>
@@ -134,7 +134,7 @@ $result = $conn->query($sql_c);
 </div> 
         <!-- View All CTA -->
         <div class="text-center mt-16">
-            <a href="/collections" class="px-8 py-3 border border-black dark:border-white text-black dark:text-white hover:bg-gray-100 dark:hover:bg-gray-900 transition-colors duration-300 text-sm uppercase tracking-wider">
+            <a href="collections.php" class="px-8 py-3 border border-black dark:border-white text-black dark:text-white hover:bg-gray-100 dark:hover:bg-gray-900 transition-colors duration-300 text-sm uppercase tracking-wider">
                 View All Collections
             </a>
         </div>
