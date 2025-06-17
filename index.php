@@ -256,12 +256,6 @@ if ($result->num_rows > 0) {
     </div>
     <?php endforeach; ?>
 </div>
-    <!-- View All Button ..-->
-    <div class="text-center mt-16">
-      <a href="/journal" class="inline-block border-b border-black dark:border-white text-black dark:text-white pb-1 font-medium uppercase tracking-wider text-sm hover:opacity-80 transition-opacity">
-        Visit The Journal →
-      </a>
-    </div>
   </div>
 </section>
 <!-- Testimonials Section -->
@@ -333,13 +327,6 @@ if ($result->num_rows > 0) {
           </footer>
         </blockquote>
       </div>
-    </div>
-
-    <!-- View All Button -->
-    <div class="text-center mt-20">
-      <a href="/reviews" class="inline-block border-b border-black dark:border-white text-black dark:text-white pb-1 font-medium uppercase tracking-wider text-sm hover:opacity-80 transition-opacity">
-        Read More Testimonials →
-      </a>
     </div>
   </div>
 </section>

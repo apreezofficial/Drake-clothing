@@ -38,7 +38,6 @@ include 'conn.php';
   <div class="w-20 h-px bg-black dark:bg-white mx-auto"></div>
 </div>
     <?php
-
 // Fetch products from DB
 $sql = "SELECT * FROM products ORDER BY created_at DESC"; 
 $result = $conn->query($sql);
