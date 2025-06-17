@@ -70,7 +70,7 @@ $cartItems = json_decode($order['batch'], true);
     <script>
         function payWithPaystack() {
             let handler = PaystackPop.setup({
-                key: 'YOUR_PUBLIC_KEY', // Replace with your Paystack public key
+                key: 'YOUR_PUBLIC_KEY',
                 email: '<?php echo $order['email']; ?>',
                 amount: <?php echo ($order['total_price'] * 100); ?>, // Paystack uses kobo
                 currency: 'NGN',
