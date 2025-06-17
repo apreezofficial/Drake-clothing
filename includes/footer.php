@@ -17,6 +17,7 @@
                     <li><a href="shop.php" class="hover:underline">All Products</a></li>
                     <li><a href="collections.php" class="hover:underline">Collections</a></li>
                     <li><a href="about.php" class="hover:underline">About Us</a></li>
+                     <li><a href="track.php" class="hover:underline">Track Product</a></li>
                 </ul>
             </div>
 
@@ -29,7 +30,6 @@
                     <li><a href="#" class="hover:underline">Shipping & Returns</a></li>
                 </ul>
             </div>
-
             <!-- Social Media -->
             <div>
                 <h3 class="text-lg font-semibold text-black dark:text-white mb-4">Follow Us</h3>

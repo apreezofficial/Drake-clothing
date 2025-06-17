@@ -24,7 +24,6 @@ include 'conn.php';
             }
         }
     </script>
-    
 </head>
 <body class="bg-drake-light dark:bg-drake-dark">
 <?php include './includes/nav.php';?>
@@ -177,7 +176,6 @@ $result = $conn->query($sql);
                         </a>
                     </div>
                 </div>
-
                 <!-- Product Details -->
                 <div class="mt-4 px-4 pb-4 text-center">
                     <h3 class="text-lg font-bold text-black dark:text-white truncate">

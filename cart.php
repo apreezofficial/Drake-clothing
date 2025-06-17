@@ -63,12 +63,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $updateStmt = $conn->prepare("UPDATE orders SET tracking_id = ? WHERE id = ?");
         $updateStmt->bind_param("si", $trackingId, $orderId);
         $updateStmt->execute();
-
         echo "<script>
-                localStorage.removeItem('cart');
-                alert('Order placed successfully!\\nTracking ID: {$trackingId}');
-                window.location.href = 'index.php';
-              </script>";
+    localStorage.removeItem('cart');
+    alert('Order placed successfully!\\nTracking ID: {$trackingId}');
+    window.location.href = 'pay.php?tracking_id={$trackingId}';
+</script>";
         exit();
     } else {
         echo "<script>alert('Failed to place order!'); window.location.href = 'cart.php';</script>";
