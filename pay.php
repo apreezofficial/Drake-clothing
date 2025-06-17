@@ -1,6 +1,6 @@
 <?php
 
-require 'conn.php'; // Make sure your DB connection file is here
+require 'conn.php';
 
 if (!isset($_GET['tracking_id'])) {
     echo "Invalid Request!";
