@@ -67,30 +67,12 @@ $cartItems = json_decode($order['batch'], true);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Order Payment - APStore</title>
+    <title>Order Payment - Drake</title>
     <script src="https://js.paystack.co/v1/inline.js"></script>
     <script src="/tailwind.js"></script>
-        <script>
-        tailwind.config = { darkMode: 'class' }
-    </script>
-        <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    colors: {
-                        drake: {
-                            light: '#ffffff',
-                            dark: '#000000',
-                        }
-                    }
-                }
-            }
-        }
-    </script>
 </head>
 <body class="bg-gray-100 min-h-screen flex items-center justify-center">
-    <?php include './includes/nav.php'; ?>
+
     <div class="bg-white shadow-lg rounded-2xl p-6 max-w-2xl w-full">
         <h1 class="text-2xl font-bold text-center mb-6 text-blue-600">Order Payment</h1>
 
@@ -132,7 +114,7 @@ $cartItems = json_decode($order['batch'], true);
     <script>
         function payWithPaystack() {
             let handler = PaystackPop.setup({
-                key: 'pk_test_782e404b46ff8501e5a335307234ed169ac07b9a', // Use your public key here
+                key: 'pk_test_782e404b46ff8501e5a335307234ed169ac07b9a',
                 email: '<?php echo $order['email']; ?>',
                 amount: <?php echo ($order['total_price'] * 100); ?>, 
                 currency: 'NGN',
