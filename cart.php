@@ -131,7 +131,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <input class="w-full p-3 rounded-lg bg-gray-100 dark:bg-gray-700 dark:text-white" type="email" name="email" id="email" required>
             </div>
                       <div class="mb-4">
-                <label class="block text-black dark:text-white mb-2" for="phone">Name</label>
+                <label class="block text-black dark:text-white mb-2" for="phone">Phone</label>
                 <input class="w-full p-3 rounded-lg bg-gray-100 dark:bg-gray-700 dark:text-white" type="text" name="phone" id="phone" required>
             </div>
             <div class="mb-4">
