@@ -72,7 +72,7 @@ $cartItems = json_decode($order['batch'], true);
             let handler = PaystackPop.setup({
                 key: 'YOUR_PUBLIC_KEY',
                 email: '<?php echo $order['email']; ?>',
-                amount: <?php echo ($order['total_price'] * 100); ?>, // Paystack uses kobo
+                amount: <?php echo ($order['total_price'] * 100); ?>, 
                 currency: 'NGN',
                 ref: '<?php echo $order['tracking_id']; ?>',
                 callback: function(response) {
