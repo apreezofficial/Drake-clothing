@@ -39,6 +39,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <script>
         tailwind.config = { darkMode: 'class' }
     </script>
+        <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        drake: {
+                            light: '#ffffff',
+                            dark: '#000000',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
 </head>
 <body class="bg-drake-light dark:bg-drake-dark min-h-screen">
 <?php include './includes/nav.php'; ?>
