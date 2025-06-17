@@ -13,17 +13,24 @@ while ($row = $result->fetch_assoc()) {
         'price' => $row['price']
     ];
 }
-
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $name = htmlspecialchars($_POST['name']);
     $email = htmlspecialchars($_POST['email']);
     $address = htmlspecialchars($_POST['address']);
+    $phone = htmlspecialchars($_POST['phone']);
     $cartData = json_decode($_POST['cartData'], true);
 
     $deliveryPrice = 4000;
     $totalPrice = $deliveryPrice;
 
-    // Validate prices using database prices
+    // Fetch product prices from DB
+    $productPrices = [];
+    $result = $conn->query("SELECT id, price FROM products");
+    while ($row = $result->fetch_assoc()) {
+        $productPrices[$row['id']] = $row['price'];
+    }
+
+    // Validate cart items and calculate total price
     foreach ($cartData as $item) {
         $productId = $item['id'];
         $quantity = intval($item['quantity']);
@@ -33,24 +40,38 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             exit();
         }
 
-        $realPrice = floatval($productPrices[$productId]['price']);
+        $realPrice = floatval($productPrices[$productId]);
         $totalPrice += $realPrice * $quantity;
     }
 
     $batchData = json_encode($cartData);
 
-    $stmt = $conn->prepare("INSERT INTO orders (tracking_id, phone, full_name, email, address, batch, delivery_price, total_price) VALUES (2737, 03989, ?, ?, ?, ?, ?, ?)");
-    $stmt->bind_param("ssssii", $name, $email, $address, $batchData, $deliveryPrice, $totalPrice);
+    // Insert order to get auto-increment ID
+    $stmt = $conn->prepare("INSERT INTO orders (tracking_id, phone, full_name, email, address, batch, delivery_price, total_price) VALUES (1, ?, ?, ?, ?, ?, ?, ?)");
+    $stmt->bind_param("sssssid", $phone, $name, $email, $address, $batchData, $deliveryPrice, $totalPrice);
 
     if ($stmt->execute()) {
+        $orderId = $stmt->insert_id; // Get the inserted row ID
+
+        // Generate Tracking ID: {rowId}{random_number}{random_letter}{random_number}
+        $randomNum1 = rand(10, 99);
+        $randomLetter = chr(rand(65, 90)); // A-Z
+        $randomNum2 = rand(10, 99);
+        $trackingId = "DRK-{$orderId}{$randomNum1}{$randomLetter}{$randomNum2}";
+
+        // Update order with tracking ID
+        $updateStmt = $conn->prepare("UPDATE orders SET tracking_id = ? WHERE id = ?");
+        $updateStmt->bind_param("si", $trackingId, $orderId);
+        $updateStmt->execute();
+
         echo "<script>
                 localStorage.removeItem('cart');
-                alert('Order placed successfully!');
+                alert('Order placed successfully!\\nTracking ID: {$trackingId}');
                 window.location.href = 'index.php';
               </script>";
         exit();
     } else {
-        echo "<script>alert('Failed to place order!');</script>";
+        echo "<script>alert('Failed to place order!'); window.location.href = 'cart.php';</script>";
     }
 }
 ?>
