@@ -2,7 +2,7 @@
 require 'conn.php';
 
 // Secret Key for Paystack (Put your own secret key here)
-$paystackSecretKey = 'sk_test_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx';
+$paystackSecretKey = 'sk_test_9d3b1b99dd442e2cfc371e618154b1884bdfc285';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['reference'])) {
     // Verify payment with Paystack secret key
@@ -69,7 +69,25 @@ $cartItems = json_decode($order['batch'], true);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Order Payment - APStore</title>
     <script src="https://js.paystack.co/v1/inline.js"></script>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="/tailwind.js"></script>
+        <script>
+        tailwind.config = { darkMode: 'class' }
+    </script>
+        <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        drake: {
+                            light: '#ffffff',
+                            dark: '#000000',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
 </head>
 <body class="bg-gray-100 min-h-screen flex items-center justify-center">
 
@@ -114,7 +132,7 @@ $cartItems = json_decode($order['batch'], true);
     <script>
         function payWithPaystack() {
             let handler = PaystackPop.setup({
-                key: 'pk_test_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx', // Use your public key here
+                key: 'pk_test_782e404b46ff8501e5a335307234ed169ac07b9a', // Use your public key here
                 email: '<?php echo $order['email']; ?>',
                 amount: <?php echo ($order['total_price'] * 100); ?>, 
                 currency: 'NGN',
