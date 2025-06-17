@@ -145,7 +145,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </div>
 `).join('');
 
-            
+            let totalPrice = products.reduce((sum, item) => sum + (parseFloat(item.product_price) * parseInt(item.product_quantity)), 0);
 
             document.getElementById('result').innerHTML = `
                 <div class="mb-8">
@@ -158,7 +158,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <p class="text-gray-700 dark:text-gray-300"><strong>Address:</strong> ${order.address}</p>
                         <p class="text-gray-700 dark:text-gray-300"><strong>Status:</strong> ${order.order_status}</p>
                         <p class="text-gray-700 dark:text-gray-300"><strong>Order Date:</strong> ${order.order_date}</p>
-                        <p class="text-gray-700 dark:text-gray-300"><strong>Total Price Paid:</strong> ₦${totalPrice}</p>
+                        <p class="text-gray-700 dark:text-gray-300"><strong>Total Price Paid:</strong> ₦${order.total_price}</p>
                     </div>
                 </div>
 
