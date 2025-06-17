@@ -57,30 +57,28 @@ $selectedId = isset($_GET['id']) ? intval($_GET['id']) : null;
 <?php include './includes/nav.php';?>
 <div style="height:60px;"></div>
     <div class="max-w-7xl mx-auto">
-
         <h1 class="text-3xl font-bold mb-6 text-center">Collections</h1>
-
-        <!-- Search Box -->
-        <div class="mb-6">
-            <input type="text" id="searchInput" placeholder="Search Collections..."
-                class="w-full p-3 rounded-lg border border-gray-300 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-black dark:focus:ring-white">
-        </div>
-
+<!-- Search Box with Icon -->
+<div class="mb-6 relative">
+    <input type="text" id="searchInput" placeholder="Search Collections..."
+        class="w-full p-3 pl-10 rounded-lg border border-gray-300 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-black dark:focus:ring-white"
+    >
+    <i class="fas fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 dark:text-gray-400"></i>
+</div> 
         <!-- Collections Grid -->
         <div id="collectionsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
             <?php if ($collectionsResult && $collectionsResult->num_rows > 0): ?>
                 <?php while ($collection = $collectionsResult->fetch_assoc()): ?>
                     <div class="collection-card bg-white dark:bg-gray-800 p-4 rounded-lg shadow hover:scale-105 transform transition duration-300 cursor-pointer"
                         data-id="<?= $collection['collection_id'] ?>" data-name="<?= strtolower($collection['name']) ?>">
-                        <h2 class="text-xl font-bold mb-2"><?= htmlspecialchars($collection['name']) ?></h2>
-                        <p class="text-gray-500 dark:text-gray-400"><?= $collection['product_count'] ?> Products</p>
+                        <h2 class="text-xl font-bold mb-2 dark:text-white"><?= htmlspecialchars($collection['name']) ?></h2>
+                        <p class="text-gray-500 dark:text-white"><?= $collection['product_count'] ?> Products</p>
                     </div>
                 <?php endwhile; ?>
             <?php else: ?>
                 <p class="col-span-4 text-center text-gray-500 dark:text-gray-400">No collections available.</p>
             <?php endif; ?>
         </div>
-
         <!-- Products Display -->
         <h2 class="text-2xl font-bold mb-4" id="productSectionTitle">Products</h2>
         <div id="productsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -124,7 +122,7 @@ $selectedId = isset($_GET['id']) ? intval($_GET['id']) : null;
                 productCard.className = 'bg-white dark:bg-gray-800 p-4 rounded-lg shadow hover:scale-105 transform transition duration-300';
                 productCard.innerHTML = `
                     <img src="${product.image_url}" alt="${product.name}" class="w-full h-48 object-cover rounded-lg mb-3">
-                    <h3 class="text-lg font-semibold mb-1">${product.name}</h3>
+                    <h3 class="text-lg font-semibold mb-1 dark:text-white">${product.name}</h3>
                     <p class="text-gray-500 dark:text-gray-400 mb-2">${product.category}</p>
                     <p class="text-black dark:text-white font-bold mb-3">$${parseFloat(product.price).toFixed(2)}</p>
                     <a href="product.php?id=${product.id}" class="inline-block bg-black dark:bg-white text-white dark:text-black px-4 py-2 rounded-full text-sm font-medium hover:bg-gray-800 dark:hover:bg-gray-300 transition duration-300">

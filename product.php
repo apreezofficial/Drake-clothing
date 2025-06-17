@@ -1,13 +1,11 @@
 <?php
 require 'conn.php';
-
 if (isset($_GET['id'])) {
     $productId = intval($_GET['id']);
 
     // Use mysqli_query directly
     $query = "SELECT * FROM products WHERE id = $productId";
     $result = mysqli_query($conn, $query);
-
     if (mysqli_num_rows($result) > 0) {
         $product = mysqli_fetch_assoc($result);
     } else {

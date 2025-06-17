@@ -1,7 +1,6 @@
 <?php
 include 'conn.php';
 ?>
-
 <!DOCTYPE html>
 <html lang="en" class="light">
 <head>
@@ -59,17 +58,14 @@ include 'conn.php';
         <span class="block">DRESS YOUR</span>
         <span class="block">OWN RHYTHM</span>
     </h1>
-
     <!-- Subheading -->
     <div class="font-serif italic text-xl text-gray-600 dark:text-gray-300 mb-8">
         "Drake isn’t just fashion — it’s your statement."
     </div>
-
     <!-- Description -->
     <p class="text-lg text-gray-600 dark:text-gray-300 mb-10 max-w-2xl mx-auto leading-relaxed">
         Clean cuts. Bold fits. Drake is where comfort meets cool — crafted for those who wear their vibe.
     </p>
-
     <!-- CTA Buttons -->
     <div class="flex flex-col sm:flex-row justify-center gap-4 mb-12">
         <a href="shop.php" class="px-8 py-3 bg-black dark:bg-white text-white dark:text-black hover:bg-gray-800 dark:hover:bg-gray-200 transition-colors duration-300 text-sm uppercase tracking-wider font-medium">
@@ -79,7 +75,6 @@ include 'conn.php';
             Browse Collections
         </a>
     </div>
-
     <!-- Additional Elements -->
     <div class="text-xs uppercase tracking-widest text-gray-400 dark:text-gray-500 space-y-2">
         <div class="flex items-center justify-center space-x-4">
@@ -106,14 +101,11 @@ include 'conn.php';
                 Explore our signature lines—where craftsmanship meets contemporary design.
             </p>
         </div>
-
 <?php
-
 // Fetch collections from DB
 $sql_c = "SELECT * FROM collections ORDER BY created_at DESC";
 $result = $conn->query($sql_c);
 ?>
-
 <!-- Collection Grid -->
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
     <?php if ($result && $result->num_rows > 0): ?>
@@ -140,8 +132,7 @@ $result = $conn->query($sql_c);
     <?php else: ?>
         <p class="text-center col-span-3 text-gray-500 dark:text-gray-400">No collections available at the moment.</p>
     <?php endif; ?>
-</div>
-
+</div> 
         <!-- View All CTA -->
         <div class="text-center mt-16">
             <a href="/collections" class="px-8 py-3 border border-black dark:border-white text-black dark:text-white hover:bg-gray-100 dark:hover:bg-gray-900 transition-colors duration-300 text-sm uppercase tracking-wider">
@@ -160,7 +151,6 @@ $result = $conn->query($sql_c);
       <div class="w-20 h-px bg-black dark:bg-white mx-auto"></div>
     </div>
     <?php
-
 // Fetch products from DB
 $sql = "SELECT * FROM products ORDER BY created_at DESC LIMIT 3"; 
 $result = $conn->query($sql);

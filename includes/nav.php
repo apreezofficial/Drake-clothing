@@ -38,7 +38,7 @@ $currentTheme = 'theme'?? 'light';
 
                 <!-- Account -->
                 <a href="/track.php" class="p-2 text-black dark:text-white hover:bg-gray-100 dark:hover:bg-gray-900 rounded-md">
-                    <i class="fas fa-search"></i>
+                    <i class="fas fa-route"></i>
                 </a>
 
                 <!-- Cart -->
