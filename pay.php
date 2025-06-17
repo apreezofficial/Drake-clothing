@@ -1,7 +1,7 @@
 <?php
 require 'conn.php';
 
-// Secret Key for Paystack (Put your own secret key here)
+// It's a test key so if you lile use it baba, na you be dat 
 $paystackSecretKey = 'sk_test_9d3b1b99dd442e2cfc371e618154b1884bdfc285';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['reference'])) {
