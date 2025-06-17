@@ -248,7 +248,7 @@ if ($result->num_rows > 0) {
                     <span class="text-xs text-white/80 mb-1 block"><?php echo $story['subtitle']; ?></span>
                 <?php endif; ?>
                 <h3 class="text-lg font-bold text-white mb-1 sm:mb-2"><?php echo $story['title']; ?></h3>
-                <a href="<?php echo $story['link']; ?>" class="text-white/80 border-b border-white/30 pb-1 text-xs uppercase tracking-wider hover:border-white transition-colors">
+                <a href="#" class="text-white/80 border-b border-white/30 pb-1 text-xs uppercase tracking-wider hover:border-white transition-colors">
                     <?php echo ($story['type'] == 'series') ? 'Watch Now' : 'Explore'; ?>
                 </a>
             </div>
