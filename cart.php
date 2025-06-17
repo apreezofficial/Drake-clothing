@@ -93,7 +93,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <img src="${item.image}" alt="${item.name}" class="w-24 h-24 object-cover rounded-lg hover:scale-105 transition duration-300">
                     <div>
                         <h2 class="text-xl font-bold text-black dark:text-white">${item.name}</h2>
-<p class="text-gray-600 dark:text-gray-400">Price: $${parseFloat(realPrices[productId]).toFixed(2)}</p>
+<p class="text-gray-600 dark:text-gray-400">Price: ₦${parseFloat(realPrices[productId]).toFixed(2)}</p>
                         <p class="text-gray-600 dark:text-gray-400">Quantity: ${item.quantity}</p>
                         <p class="text-gray-600 dark:text-gray-400">Options: ${formatOptions(item.options)}</p>
                     </div>

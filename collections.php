@@ -124,7 +124,7 @@ $selectedId = isset($_GET['id']) ? intval($_GET['id']) : null;
                     <img src="${product.image_url}" alt="${product.name}" class="w-full h-48 object-cover rounded-lg mb-3">
                     <h3 class="text-lg font-semibold mb-1 dark:text-white">${product.name}</h3>
                     <p class="text-gray-500 dark:text-gray-400 mb-2">${product.category}</p>
-                    <p class="text-black dark:text-white font-bold mb-3">$${parseFloat(product.price).toFixed(2)}</p>
+                    <p class="text-black dark:text-white font-bold mb-3">₦${parseFloat(product.price).toFixed(2)}</p>
                     <a href="product.php?id=${product.id}" class="inline-block bg-black dark:bg-white text-white dark:text-black px-4 py-2 rounded-full text-sm font-medium hover:bg-gray-800 dark:hover:bg-gray-300 transition duration-300">
                         View
                     </a>

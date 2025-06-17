@@ -57,9 +57,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 <body class="bg-drake-light dark:bg-drake-dark min-h-screen">
 <?php include './includes/nav.php'; ?>
-<div class="max-w-2xl w-full bg-white dark:bg-gray-800 p-8 rounded-3xl shadow-2xl transition-all duration-500">
-    <h1 class="text-4xl font-extrabold text-center text-black dark:text-white mb-8 tracking-wide">Batch Order Tracking</h1>
-
+<div style="height: 60px;"></div>
+<div class="max-w-2xl w-full bg-white dark:bg-black p-8 rounded-3xl shadow-2xl transition-all duration-500">
+    <h1 class="text-4xl font-extrabold text-center text-black dark:text-white mb-8 tracking-wide">Order Tracking</h1>
     <div class="flex flex-col md:flex-row items-center gap-4 mb-8">
         <div class="flex items-center w-full">
             <span class="bg-gray-300 dark:bg-gray-700 px-5 py-3 rounded-l-full text-gray-700 dark:text-gray-300 text-lg select-none font-medium">DRK-</span>
