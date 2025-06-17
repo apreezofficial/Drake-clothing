@@ -75,14 +75,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         <div id="result" class="text-center"></div>
     </div>
-
-    <!-- Download Button -->
-    <div class="flex justify-center mt-8">
-        <button id="downloadPage" class="bg-green-600 text-white px-6 py-3 rounded-full hover:bg-green-700 active:scale-95 transition-all duration-300 flex items-center gap-2">
-            <i class="fas fa-download"></i> <span class="font-semibold">Download Tracking Page</span>
-        </button>
-    </div>
-
     <script>
         document.getElementById('trackBtn').addEventListener('click', function () {
             const idPart = document.getElementById('trackingInput').value.trim();
@@ -158,7 +150,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <p class="text-gray-700 dark:text-gray-300"><strong>Address:</strong> ${order.address}</p>
                         <p class="text-gray-700 dark:text-gray-300"><strong>Status:</strong> ${order.order_status}</p>
                         <p class="text-gray-700 dark:text-gray-300"><strong>Order Date:</strong> ${order.order_date}</p>
-                        <p class="text-gray-700 dark:text-gray-300"><strong>Total Price Paid:</strong> ₦${order.total_price}</p>
+                        <p class="text-gray-700 dark:text-gray-300"><strong>Total Price Paid:</strong> ₦${parseFloat(order.total_price) + parseFloat(order.delivery_price)}</p>
                     </div>
                 </div>
 
@@ -182,11 +174,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 });
             });
         }
-
-        // Export page as PDF (prints the current view)
-        document.getElementById('downloadPage').addEventListener('click', () => {
-            window.print();
-        });
     </script>
 </body>
 </html>
