@@ -90,7 +90,7 @@ $cartItems = json_decode($order['batch'], true);
     </script>
 </head>
 <body class="bg-gray-100 min-h-screen flex items-center justify-center">
-
+    <?php include './includes/nav.php'; ?>
     <div class="bg-white shadow-lg rounded-2xl p-6 max-w-2xl w-full">
         <h1 class="text-2xl font-bold text-center mb-6 text-blue-600">Order Payment</h1>
 
