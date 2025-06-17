@@ -75,7 +75,7 @@ $result = $conn->query($sql);
                         <?= htmlspecialchars($row['category']) ?>
                     </p>
                     <p class="text-black dark:text-white font-semibold mt-2 text-lg">
-                        $<?= number_format($row['price'], 2) ?>
+                        ₦<?= number_format($row['price'], 2) ?>
                     </p>
                 </div>
             </div>

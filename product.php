@@ -123,7 +123,7 @@ error_reporting(1);
         <div class="space-y-4">
             <h1 class="text-3xl font-bold text-black dark:text-white"><?= htmlspecialchars($product['name']) ?></h1>
             <p class="text-gray-500 dark:text-gray-400 text-lg"><?= htmlspecialchars($product['category']) ?></p>
-            <p class="text-black dark:text-white text-2xl font-semibold">$<?= number_format($product['price'], 2) ?></p>
+            <p class="text-black dark:text-white text-2xl font-semibold">₦<?= number_format($product['price'], 2) ?></p>
             <p class="text-gray-600 dark:text-gray-300">
                 <?= htmlspecialchars($product['description']) ?>
             </p>

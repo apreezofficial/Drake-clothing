@@ -39,36 +39,88 @@ while ($row = $result->fetch_assoc()) {
         }
     </script>
 </head>
+<?php
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $name = htmlspecialchars($_POST['name']);
+    $email = htmlspecialchars($_POST['email']);
+    $address = htmlspecialchars($_POST['address']);
+    $cartData = json_decode($_POST['cartData'], true);
+
+    $deliveryPrice = 4000;
+    $totalPrice = $deliveryPrice;
+
+    foreach ($cartData as $item) {
+        $totalPrice += floatval($item['price']) * intval($item['quantity']);
+    }
+
+    $batchData = json_encode($cartData);
+
+    $stmt = $conn->prepare("INSERT INTO orders (tracking_id, phone, full_name, email, address, batch, delivery_price, total_price) VALUES (2737, 03989, ?, ?, ?, ?, ?, ?)");
+    $stmt->bind_param("ssssii", $name, $email, $address, $batchData, $deliveryPrice, $totalPrice);
+
+    if ($stmt->execute()) {
+        echo "<script>
+                localStorage.removeItem('cart');
+                alert('Order placed successfully!');
+                window.location.href = 'index.php';
+              </script>";
+        exit();
+    } else {
+        echo "<script>alert('Failed to place order!');</script>";
+    }
+}
+?>
+
 <body class="bg-drake-light dark:bg-drake-dark min-h-screen">
-<?php include './includes/nav.php'; ?>
+  <?php include './includes/nav.php'; ?>
 <div style="height: 60px;"></div>
 
 <div class="container mx-auto p-4">
     <h1 class="text-3xl font-bold text-center text-black dark:text-white mb-8">Your Cart</h1>
 
     <div id="cart-container" class="space-y-6">
-        <!-- Cart items will be injected here -->
     </div>
 
     <div class="flex justify-center mt-10">
-        <a href="checkout.php" class="bg-black dark:bg-white text-white dark:text-black px-6 py-3 rounded-full hover:bg-gray-800 dark:hover:bg-gray-300 transition duration-300">Proceed to Checkout</a>
+        <button id="checkout-btn" class="bg-black dark:bg-white text-white dark:text-black px-6 py-3 rounded-full hover:bg-gray-800 dark:hover:bg-gray-300 transition duration-300">Proceed to Checkout</button>
+    </div>
+
+    <div id="checkout-form" class="hidden mt-10 max-w-lg mx-auto bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-lg">
+        <h2 class="text-2xl font-bold mb-6 text-black dark:text-white">Checkout</h2>
+        <form method="POST" id="orderForm">
+            <div class="mb-4">
+                <label class="block text-black dark:text-white mb-2" for="name">Name</label>
+                <input class="w-full p-3 rounded-lg bg-gray-100 dark:bg-gray-700 dark:text-white" type="text" name="name" id="name" required>
+            </div>
+            <div class="mb-4">
+                <label class="block text-black dark:text-white mb-2" for="email">Email</label>
+                <input class="w-full p-3 rounded-lg bg-gray-100 dark:bg-gray-700 dark:text-white" type="email" name="email" id="email" required>
+            </div>
+            <div class="mb-4">
+                <label class="block text-black dark:text-white mb-2" for="address">Address</label>
+                <textarea class="w-full p-3 rounded-lg bg-gray-100 dark:bg-gray-700 dark:text-white" name="address" id="address" required></textarea>
+            </div>
+            <input type="hidden" name="cartData" id="cartData">
+            <button type="submit" class="bg-green-600 text-white px-6 py-3 rounded-full hover:bg-green-700 transition duration-300">Place Order</button>
+        </form>
     </div>
 </div>
+
 <script>
 document.addEventListener('DOMContentLoaded', () => {
     const cartContainer = document.getElementById('cart-container');
+    const checkoutBtn = document.getElementById('checkout-btn');
+    const checkoutForm = document.getElementById('checkout-form');
+    const cartDataInput = document.getElementById('cartData');
     const cart = JSON.parse(localStorage.getItem('cart')) || {};
+    const realPrices = {}; // You can pass this from PHP if you want
 
     function formatOptions(options) {
         if (!options || typeof options !== 'object' || Object.keys(options).length === 0) {
             return 'None';
         }
-
-        const formatted = Object.entries(options).map(([key, value]) => {
-            return `${capitalize(key)}: ${capitalize(value)}`;
-        });
-
-        return formatted.join(' | ');
+        return Object.entries(options).map(([key, value]) => `${capitalize(key)}: ${capitalize(value)}`).join(' | ');
     }
 
     function capitalize(str) {
@@ -77,9 +129,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function displayCart() {
         cartContainer.innerHTML = '';
-
         if (Object.keys(cart).length === 0) {
             cartContainer.innerHTML = '<p class="text-center text-gray-600 dark:text-gray-300 text-lg">Your cart is empty 😢</p>';
+            checkoutBtn.classList.add('hidden');
             return;
         }
 
@@ -88,19 +140,20 @@ document.addEventListener('DOMContentLoaded', () => {
             const cartItem = document.createElement('div');
             cartItem.className = 'flex flex-col md:flex-row items-center justify-between bg-white dark:bg-gray-800 p-4 rounded-2xl shadow-lg mb-4';
 
+            const itemPrice = item.price ? parseFloat(item.price).toFixed(2) : '0.00';
+
             cartItem.innerHTML = `
                 <div class="flex items-center space-x-4">
                     <img src="${item.image}" alt="${item.name}" class="w-24 h-24 object-cover rounded-lg hover:scale-105 transition duration-300">
                     <div>
                         <h2 class="text-xl font-bold text-black dark:text-white">${item.name}</h2>
-<p class="text-gray-600 dark:text-gray-400">Price: ₦${parseFloat(realPrices[productId]).toFixed(2)}</p>
+                        <p class="text-gray-600 dark:text-gray-400">Price: ₦${itemPrice}</p>
                         <p class="text-gray-600 dark:text-gray-400">Quantity: ${item.quantity}</p>
                         <p class="text-gray-600 dark:text-gray-400">Options: ${formatOptions(item.options)}</p>
                     </div>
                 </div>
                 <button class="remove-btn bg-red-600 text-white px-4 py-2 rounded-full hover:bg-red-700 transition duration-300 mt-4 md:mt-0" data-id="${productId}">Remove</button>
             `;
-
             cartContainer.appendChild(cartItem);
         });
     }
@@ -112,6 +165,22 @@ document.addEventListener('DOMContentLoaded', () => {
             localStorage.setItem('cart', JSON.stringify(cart));
             displayCart();
         }
+    });
+
+    checkoutBtn.addEventListener('click', () => {
+        checkoutForm.classList.remove('hidden');
+        checkoutBtn.classList.add('hidden');
+
+        const cartArray = Object.keys(cart).map(productId => {
+            return {
+                name: cart[productId].name,
+                price: cart[productId].price,
+                quantity: cart[productId].quantity,
+                options: cart[productId].options,
+                image: cart[productId].image
+            };
+        });
+        cartDataInput.value = JSON.stringify(cartArray);
     });
 
     displayCart();
