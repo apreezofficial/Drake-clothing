@@ -122,7 +122,7 @@ $result = $conn->query($sql_c);
                     <p class="mt-1 text-gray-600 dark:text-gray-300 text-sm">
                         <?= htmlspecialchars($row['description']) ?>
                     </p>
-                    <a href="collections.php<?= $row['collection_id'] ?>" class="mt-3 inline-block text-sm font-medium text-black dark:text-white border-b border-transparent hover:border-black dark:hover:border-white transition-all duration-300">
+                    <a href="collections.php?id=<?= $row['collection_id'] ?>" class="mt-3 inline-block text-sm font-medium text-black dark:text-white border-b border-transparent hover:border-black dark:hover:border-white transition-all duration-300">
                         Discover Now →
                     </a>
                 </div>
