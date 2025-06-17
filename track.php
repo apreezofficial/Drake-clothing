@@ -158,7 +158,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <p class="text-gray-700 dark:text-gray-300"><strong>Address:</strong> ${order.address}</p>
                         <p class="text-gray-700 dark:text-gray-300"><strong>Status:</strong> ${order.order_status}</p>
                         <p class="text-gray-700 dark:text-gray-300"><strong>Order Date:</strong> ${order.order_date}</p>
-                        <p class="text-gray-700 dark:text-gray-300"><strong>Total Price Paid:</strong> ₦${totalPrice}</p>
+                        <p class="text-gray-700 dark:text-gray-300"><strong>Total Price Paid:</strong> ₦${total_price}</p>
                     </div>
                 </div>
 
