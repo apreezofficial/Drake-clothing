@@ -1,45 +1,18 @@
 <?php
 require 'conn.php';
 
-$stmt = $conn->prepare("SELECT id, price FROM products");
+// Fetch product prices from the database
+$stmt = $conn->prepare("SELECT id, name, price FROM products");
 $stmt->execute();
 $result = $stmt->get_result();
 
 $productPrices = [];
 while ($row = $result->fetch_assoc()) {
-    $productPrices[$row['id']] = $row['price'];
+    $productPrices[$row['id']] = [
+        'name' => $row['name'],
+        'price' => $row['price']
+    ];
 }
-?>
-
-<script>
-    const realPrices = <?php echo json_encode($productPrices); ?>;
-</script>
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-      <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Drake Clothing Store - <?= htmlspecialchars($product['product_name']) ?></title>
-    <script src="/tailwind.js"></script>
-    <link rel="stylesheet" href="includes/font-awesome/css/all.css">
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    colors: {
-                        drake: {
-                            light: '#ffffff',
-                            dark: '#000000',
-                        }
-                    }
-                }
-            }
-        }
-    </script>
-</head>
-<?php
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $name = htmlspecialchars($_POST['name']);
@@ -50,8 +23,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $deliveryPrice = 4000;
     $totalPrice = $deliveryPrice;
 
+    // Validate prices using database prices
     foreach ($cartData as $item) {
-        $totalPrice += floatval($item['price']) * intval($item['quantity']);
+        $productId = $item['id'];
+        $quantity = intval($item['quantity']);
+
+        if (!isset($productPrices[$productId])) {
+            echo "<script>alert('Invalid product detected!'); window.location.href = 'cart.php';</script>";
+            exit();
+        }
+
+        $realPrice = floatval($productPrices[$productId]['price']);
+        $totalPrice += $realPrice * $quantity;
     }
 
     $batchData = json_encode($cartData);
@@ -72,15 +55,44 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 }
 ?>
 
+<script>
+    const realPrices = <?php echo json_encode($productPrices); ?>;
+</script>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drake Clothing Store - Cart</title>
+    <script src="/tailwind.js"></script>
+    <link rel="stylesheet" href="includes/font-awesome/css/all.css">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        drake: {
+                            light: '#ffffff',
+                            dark: '#000000',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
 <body class="bg-drake-light dark:bg-drake-dark min-h-screen">
-  <?php include './includes/nav.php'; ?>
+<?php include './includes/nav.php'; ?>
 <div style="height: 60px;"></div>
 
 <div class="container mx-auto p-4">
     <h1 class="text-3xl font-bold text-center text-black dark:text-white mb-8">Your Cart</h1>
 
-    <div id="cart-container" class="space-y-6">
-    </div>
+    <div id="cart-container" class="space-y-6"></div>
 
     <div class="flex justify-center mt-10">
         <button id="checkout-btn" class="bg-black dark:bg-white text-white dark:text-black px-6 py-3 rounded-full hover:bg-gray-800 dark:hover:bg-gray-300 transition duration-300">Proceed to Checkout</button>
@@ -113,8 +125,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const checkoutBtn = document.getElementById('checkout-btn');
     const checkoutForm = document.getElementById('checkout-form');
     const cartDataInput = document.getElementById('cartData');
-    const cart = JSON.parse(localStorage.getItem('cart')) || {};
-    const realPrices = {}; // You can pass this from PHP if you want
+
+    let cart = JSON.parse(localStorage.getItem('cart')) || {};
 
     function formatOptions(options) {
         if (!options || typeof options !== 'object' || Object.keys(options).length === 0) {
@@ -137,17 +149,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
         Object.keys(cart).forEach(productId => {
             const item = cart[productId];
+            const realPrice = realPrices[productId] ? parseFloat(realPrices[productId].price).toFixed(2) : '0.00';
+            item.price = realPrice; // Force update cart price to real price
+
             const cartItem = document.createElement('div');
             cartItem.className = 'flex flex-col md:flex-row items-center justify-between bg-white dark:bg-gray-800 p-4 rounded-2xl shadow-lg mb-4';
-
-            const itemPrice = item.price ? parseFloat(item.price).toFixed(2) : '0.00';
 
             cartItem.innerHTML = `
                 <div class="flex items-center space-x-4">
                     <img src="${item.image}" alt="${item.name}" class="w-24 h-24 object-cover rounded-lg hover:scale-105 transition duration-300">
                     <div>
                         <h2 class="text-xl font-bold text-black dark:text-white">${item.name}</h2>
-                        <p class="text-gray-600 dark:text-gray-400">Price: ₦${itemPrice}</p>
+                        <p class="text-gray-600 dark:text-gray-400">Price: ₦${realPrice}</p>
                         <p class="text-gray-600 dark:text-gray-400">Quantity: ${item.quantity}</p>
                         <p class="text-gray-600 dark:text-gray-400">Options: ${formatOptions(item.options)}</p>
                     </div>
@@ -173,6 +186,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const cartArray = Object.keys(cart).map(productId => {
             return {
+                id: productId,
                 name: cart[productId].name,
                 price: cart[productId].price,
                 quantity: cart[productId].quantity,
