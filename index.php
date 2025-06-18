@@ -24,6 +24,31 @@ include 'conn.php';
             }
         }
     </script>
+    <style>
+    /* Grid animation */
+    @keyframes float-1 {
+        0%, 100% { transform: translate(0, 0) rotate(0deg); }
+        50% { transform: translate(10px, 15px) rotate(5deg); }
+    }
+    @keyframes float-2 {
+        0%, 100% { transform: translate(0, 0) rotate(0deg); }
+        50% { transform: translate(-15px, 10px) rotate(-3deg); }
+    }
+    @keyframes float-3 {
+        0%, 100% { transform: translate(0, 0) rotate(0deg); }
+        50% { transform: translate(5px, -10px) rotate(2deg); }
+    }
+    
+    .animate-float-1 {
+        animation: float-1 8s ease-in-out infinite;
+    }
+    .animate-float-2 {
+        animation: float-2 10s ease-in-out infinite;
+    }
+    .animate-float-3 {
+        animation: float-3 12s ease-in-out infinite;
+    }
+</style>
 </head>
 <body class="bg-drake-light dark:bg-drake-dark">
 <?php include './includes/nav.php';?>
