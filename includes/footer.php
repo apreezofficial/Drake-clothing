@@ -1,4 +1,4 @@
-<!-- MAD CRAZY FOOTER -->
+<!-- footer.php -->
 <footer class="bg-white dark:bg-black border-t-4 border-black dark:border-white mt-24 relative overflow-hidden">
     <!-- Decorative elements -->
     <div class="absolute -top-24 -left-24 w-48 h-48 bg-black dark:bg-white rounded-full opacity-5 dark:opacity-10"></div>
