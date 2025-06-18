@@ -67,7 +67,7 @@
                 setTimeout(() => {
                     toast.classList.add('translate-x-full');
                     setTimeout(() => toast.classList.add('hidden'), 300);
-                }, 3000);
+                }, 30000);
             }
 
             // Validate email
