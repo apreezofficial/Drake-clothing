@@ -270,7 +270,6 @@ if ($result->num_rows > 0) {
           </p>
           <footer class="flex items-center">
             <div class="w-12 h-12 rounded-full bg-gray-200 dark:bg-gray-800 mr-4 overflow-hidden">
-
               <div class="w-full h-full flex items-center justify-center text-gray-400">JP</div>
             </div>
             <div>
