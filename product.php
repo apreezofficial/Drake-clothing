@@ -241,7 +241,6 @@ document.addEventListener('DOMContentLoaded', () => {
         };
 
         cart[productId].quantity += 1;
-
         // Save the latest selected options
         cart[productId].options = userOptions;
         saveCart();
