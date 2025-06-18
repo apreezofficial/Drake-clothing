@@ -1,4 +1,4 @@
-<body class="bg-black text-white min-h-screen flex items-center justify-center p-4 md:p-6 transition-colors duration-300" id="body">
+
     <!-- Notification Toast -->
     <div id="toast" class="fixed top-4 right-4 z-50 hidden">
         <div class="px-6 py-4 rounded-lg shadow-lg bg-white dark:bg-gray-800 text-black dark:text-white border-l-4 border-green-500 flex items-center">
@@ -195,4 +195,3 @@
             animation: stripe 1s linear infinite;
         }
     </style>
-</body>
