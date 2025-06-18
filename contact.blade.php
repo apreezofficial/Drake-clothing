@@ -184,7 +184,6 @@
             });
         });
     </script>
-
     <style>
         @keyframes stripe {
             0% { transform: translateX(-100%); }
