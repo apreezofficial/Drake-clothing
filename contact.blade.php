@@ -12,8 +12,11 @@
     <!-- Contact Form -->
     <div class="flex items-center justify-center p-4 bg-black text-white">
     <div class="bg-white dark:bg-gray-900 text-black dark:text-white p-6 md:p-8 rounded-2xl shadow-lg w-full max-w-2xl transition-colors duration-300 border border-gray-200 dark:border-gray-700" id="formContainer">
-        <h1 class="text-3xl font-bold mb-6 text-center">Contact Us</h1>
-
+    <div class="text-center mb-16">
+      <span class="text-xs uppercase tracking-widest text-gray-500 dark:text-gray-400 mb-2 block">Client Voices</span>
+      <h2 class="text-3xl sm:text-4xl font-bold text-black dark:text-white mb-4">WORTH WEARING</h2>
+      <div class="w-20 h-px bg-black dark:bg-white mx-auto"></div>
+    </div>
         <form id="contactForm" class="space-y-4">
             <div>
                 <label class="block mb-2 font-medium">Name</label>
