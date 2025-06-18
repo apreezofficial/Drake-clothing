@@ -345,7 +345,7 @@ if ($result->num_rows > 0) {
     </div>
   </div>
 </section>
-<?php include 'contact.blade.php';?>  
+<?php include 'contact.php';?>  
 <!-- Newsletter Section -->
 <section class="py-24 bg-gray-50 dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800">
   <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
