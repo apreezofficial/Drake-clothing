@@ -10,7 +10,7 @@
     </div>
 
     <!-- Contact Form -->
-    <div class="min-h-screen flex items-center justify-center p-4 bg-black text-white">
+    <div class="flex items-center justify-center p-4 bg-black text-white">
     <div class="bg-white dark:bg-gray-900 text-black dark:text-white p-6 md:p-8 rounded-2xl shadow-lg w-full max-w-2xl transition-colors duration-300 border border-gray-200 dark:border-gray-700" id="formContainer">
         <h1 class="text-3xl font-bold mb-6 text-center">Contact Draje</h1>
 
