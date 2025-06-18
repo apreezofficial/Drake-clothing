@@ -10,6 +10,7 @@
     </div>
 
     <!-- Contact Form -->
+    <div class="min-h-screen flex items-center justify-center p-4 bg-black text-white">
     <div class="bg-white dark:bg-gray-900 text-black dark:text-white p-6 md:p-8 rounded-2xl shadow-lg w-full max-w-2xl transition-colors duration-300 border border-gray-200 dark:border-gray-700" id="formContainer">
         <h1 class="text-3xl font-bold mb-6 text-center">Contact Draje</h1>
 
@@ -22,7 +23,7 @@
 
             <div>
                 <label class="block mb-2 font-medium">Email</label>
-                <input type="email" name="email" id="email" class="w-full p-3 rounded-lg border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-black dark:focus:ring-white bg-white dark:bg-gray-800 transition">
+                <input type="text" name="email" id="email" class="w-full p-3 rounded-lg border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-black dark:focus:ring-white bg-white dark:bg-gray-800 transition">
                 <p id="email-error" class="text-red-500 text-sm mt-1 hidden"></p>
             </div>
 
@@ -45,7 +46,7 @@
             </button>
         </form>
     </div>
-
+</div>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const contactForm = document.getElementById('contactForm');
