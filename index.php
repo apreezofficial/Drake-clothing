@@ -37,21 +37,18 @@ include 'conn.php';
             <div class="bg-black dark:bg-white"></div>
         <?php endfor; ?>
     </div>
-
     <!-- Animated floating squares -->
     <div class="absolute inset-0 overflow-hidden pointer-events-none">
         <div class="absolute top-1/4 left-1/4 w-16 h-16 border border-black dark:border-white opacity-20 animate-float-1"></div>
         <div class="absolute top-1/3 right-1/4 w-12 h-12 border border-black dark:border-white opacity-20 animate-float-2"></div>
         <div class="absolute bottom-1/4 right-1/3 w-10 h-10 border border-black dark:border-white opacity-20 animate-float-3"></div>
     </div>
-
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full text-center relative z-10">
 <div class="max-w-3xl mx-auto">
     <!-- Brand Mark -->
     <div class="mb-2">
         <span class="text-xs tracking-[0.5em] text-gray-500 dark:text-gray-400">EST. <?php echo date('Y');?></span>
     </div>
-
     <!-- Main Heading -->
     <h1 class="text-5xl sm:text-6xl lg:text-7xl font-bold text-black dark:text-white mb-4 leading-tight">
         <span class="block">DRESS YOUR</span>
