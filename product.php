@@ -244,11 +244,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Save the latest selected options
         cart[productId].options = userOptions;
-
         saveCart();
         updateProductDisplay();
     });
-
     minusBtn.addEventListener('click', () => {
         if (cart[productId] && cart[productId].quantity > 1) {
             cart[productId].quantity -= 1;
@@ -268,8 +266,6 @@ document.addEventListener('DOMContentLoaded', () => {
         window.location.href = 'cart.php';
     });
 });
-
 </script>
 </body>
-
 </html>
