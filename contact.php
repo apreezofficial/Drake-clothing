@@ -160,7 +160,6 @@
                     formData.append('email', email);
                     formData.append('message', message);
                     formData.append('file_base64', fileBase64);
-
                     const response = await fetch('ajax/contact.php', {
                         method: 'POST',
                         body: formData
