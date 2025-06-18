@@ -428,6 +428,5 @@ document.getElementById('subscribeForm').addEventListener('submit', function(e) 
     }
 </style>
 <?php include './includes/footer.php';?>
-
 </body>
 </html>
