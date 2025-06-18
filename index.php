@@ -210,16 +210,13 @@ $result = $conn->query($sql);
         Discover the art of intentional dressing through our seasonal narratives
       </p>
     </div>
-
 <?php
 // Fetch all editorials
 $sql = "SELECT * FROM editorials ORDER BY id ASC";
 $result = $conn->query($sql);
-
 // Separate feature and secondary stories
 $featureStory = null;
 $secondaryStories = [];
-
 if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
         if ($row['type'] === 'feature' && $featureStory === null) {
@@ -262,7 +259,6 @@ if ($result->num_rows > 0) {
       <h2 class="text-3xl sm:text-4xl font-bold text-black dark:text-white mb-4">WORTH WEARING</h2>
       <div class="w-20 h-px bg-black dark:bg-white mx-auto"></div>
     </div>
-
     <!-- Testimonial Grid -->
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
       <!-- Testimonial 1 -->
@@ -274,7 +270,7 @@ if ($result->num_rows > 0) {
           </p>
           <footer class="flex items-center">
             <div class="w-12 h-12 rounded-full bg-gray-200 dark:bg-gray-800 mr-4 overflow-hidden">
-              <!-- Customer image placeholder -->
+
               <div class="w-full h-full flex items-center justify-center text-gray-400">JP</div>
             </div>
             <div>
