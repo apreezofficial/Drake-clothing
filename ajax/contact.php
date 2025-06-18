@@ -9,7 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $createdAt = date('Y-m-d H:i:s');
 
     if (!empty($name) && !empty($email) && !empty($message)) {
-        $stmt = $conn->prepare("INSERT INTO contacts_messages (name, email, message, file_base64, submitted_at) VALUES (?, ?, ?, ?, ?)");
+        $stmt = $conn->prepare("INSERT INTO contact_messages (name, email, message, file_base64, submitted_at) VALUES (?, ?, ?, ?, ?)");
         $stmt->bind_param("sssss", $name, $email, $message, $fileData, $createdAt);
 
         if ($stmt->execute()) {
